@@ -1,0 +1,18 @@
+b97699071e8ee37d7e611040ce87d999
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _createIconSet = _interopRequireDefault(require("./createIconSet"));
+
+var _EvilIcons = _interopRequireDefault(require("./vendor/react-native-vector-icons/Fonts/EvilIcons.ttf"));
+
+var _EvilIcons2 = _interopRequireDefault(require("./vendor/react-native-vector-icons/glyphmaps/EvilIcons.json"));
+
+var _default = (0, _createIconSet.default)(_EvilIcons2.default, 'evilicons', _EvilIcons.default);
+
+exports.default = _default;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL3NyYy9FdmlsSWNvbnMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7OztBQUFBOztBQUNBOztBQUNBOztlQUVlLDRCQUFjLG1CQUFkLEVBQXdCLFdBQXhCLEVBQXFDLGtCQUFyQyxDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IGNyZWF0ZUljb25TZXQgZnJvbSAnLi9jcmVhdGVJY29uU2V0JztcbmltcG9ydCBmb250IGZyb20gJy4vdmVuZG9yL3JlYWN0LW5hdGl2ZS12ZWN0b3ItaWNvbnMvRm9udHMvRXZpbEljb25zLnR0Zic7XG5pbXBvcnQgZ2x5cGhNYXAgZnJvbSAnLi92ZW5kb3IvcmVhY3QtbmF0aXZlLXZlY3Rvci1pY29ucy9nbHlwaG1hcHMvRXZpbEljb25zLmpzb24nO1xuXG5leHBvcnQgZGVmYXVsdCBjcmVhdGVJY29uU2V0KGdseXBoTWFwLCAnZXZpbGljb25zJywgZm9udCk7XG4iXSwic291cmNlUm9vdCI6IiJ9

@@ -1,0 +1,14 @@
+4bc74d90d4778ae6471d7a2e863c26f2
+_getJestObj().mock("./RNGestureHandlerModule");
+
+function _getJestObj() {
+  var _require = require("@jest/globals"),
+      jest = _require.jest;
+
+  _getJestObj = function _getJestObj() {
+    return jest;
+  };
+
+  return jest;
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImplc3RTZXR1cC5qcyJdLCJuYW1lcyI6WyJtb2NrIl0sIm1hcHBpbmdzIjoiQUFBQSxjQUFLQSxJQUFMIiwic291cmNlc0NvbnRlbnQiOlsiamVzdC5tb2NrKCcuL1JOR2VzdHVyZUhhbmRsZXJNb2R1bGUnKTtcbiJdfQ==

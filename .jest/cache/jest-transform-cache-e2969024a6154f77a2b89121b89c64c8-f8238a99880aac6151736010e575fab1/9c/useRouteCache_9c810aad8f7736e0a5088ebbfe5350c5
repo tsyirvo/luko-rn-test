@@ -1,0 +1,112 @@
+873a0212ba7b1ef37d68bafaa74ab973
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = useRouteCache;
+exports.SUPPRESS_STATE_ACCESS_WARNING = void 0;
+
+var React = _interopRequireWildcard(require("react"));
+
+function _getRequireWildcardCache() {
+  if (typeof WeakMap !== "function") return null;
+  var cache = new WeakMap();
+
+  _getRequireWildcardCache = function _getRequireWildcardCache() {
+    return cache;
+  };
+
+  return cache;
+}
+
+function _interopRequireWildcard(obj) {
+  if (obj && obj.__esModule) {
+    return obj;
+  }
+
+  if (obj === null || typeof obj !== "object" && typeof obj !== "function") {
+    return {
+      default: obj
+    };
+  }
+
+  var cache = _getRequireWildcardCache();
+
+  if (cache && cache.has(obj)) {
+    return cache.get(obj);
+  }
+
+  var newObj = {};
+  var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+
+  for (var key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+
+      if (desc && (desc.get || desc.set)) {
+        Object.defineProperty(newObj, key, desc);
+      } else {
+        newObj[key] = obj[key];
+      }
+    }
+  }
+
+  newObj.default = obj;
+
+  if (cache) {
+    cache.set(obj, newObj);
+  }
+
+  return newObj;
+}
+
+var SUPPRESS_STATE_ACCESS_WARNING = {
+  value: false
+};
+exports.SUPPRESS_STATE_ACCESS_WARNING = SUPPRESS_STATE_ACCESS_WARNING;
+
+function useRouteCache(routes) {
+  var cache = React.useMemo(function () {
+    return {
+      current: new Map()
+    };
+  }, []);
+
+  if (process.env.NODE_ENV === 'production') {
+    return routes;
+  }
+
+  cache.current = routes.reduce(function (acc, route) {
+    var previous = cache.current.get(route);
+
+    if (previous) {
+      acc.set(route, previous);
+    } else {
+      var proxy = _objectSpread({}, route);
+
+      Object.defineProperty(proxy, 'state', {
+        get: function get() {
+          if (!SUPPRESS_STATE_ACCESS_WARNING.value) {
+            console.warn("Accessing the 'state' property of the 'route' object is not supported. If you want to get the focused route name, use the 'getFocusedRouteNameFromRoute' helper instead: https://reactnavigation.org/docs/screen-options-resolution/#setting-parent-screen-options-based-on-child-navigators-state");
+          }
+
+          return route.state;
+        }
+      });
+      acc.set(route, proxy);
+    }
+
+    return acc;
+  }, new Map());
+  return Array.from(cache.current.values());
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInVzZVJvdXRlQ2FjaGUudHN4Il0sIm5hbWVzIjpbIlNVUFBSRVNTX1NUQVRFX0FDQ0VTU19XQVJOSU5HIiwidmFsdWUiLCJjYWNoZSIsImN1cnJlbnQiLCJwcm9jZXNzIiwicHJldmlvdXMiLCJhY2MiLCJwcm94eSIsInJvdXRlIiwiT2JqZWN0IiwiZ2V0IiwiY29uc29sZSIsIkFycmF5Il0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsSUFBQSxLQUFBLEdBQUEsdUJBQUEsQ0FBQSxPQUFBLENBQUEsT0FBQSxDQUFBLENBQUE7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQWVPLElBQU1BLDZCQUE2QixHQUFHO0FBQUVDLEVBQUFBLEtBQUssRUFBRTtBQUFULENBQXRDOzs7QUFNUSxTQUFBLGFBQUEsQ0FBQSxNQUFBLEVBRWI7QUFFQSxNQUFNQyxLQUFLLEdBQUcsS0FBSyxDQUFMLE9BQUEsQ0FBYztBQUFBLFdBQU87QUFBRUMsTUFBQUEsT0FBTyxFQUFFLElBQUEsR0FBQTtBQUFYLEtBQVA7QUFBQSxHQUFkLEVBQWQsRUFBYyxDQUFkOztBQUVBLE1BQUlDLE9BQU8sQ0FBUEEsR0FBQUEsQ0FBQUEsUUFBQUEsS0FBSixZQUFBLEVBQTJDO0FBRXpDLFdBQUEsTUFBQTtBQUNEOztBQUVERixFQUFBQSxLQUFLLENBQUxBLE9BQUFBLEdBQWdCLE1BQU0sQ0FBTixNQUFBLENBQWMsVUFBQSxHQUFBLEVBQUEsS0FBQSxFQUFnQjtBQUM1QyxRQUFNRyxRQUFRLEdBQUdILEtBQUssQ0FBTEEsT0FBQUEsQ0FBQUEsR0FBQUEsQ0FBakIsS0FBaUJBLENBQWpCOztBQUVBLFFBQUEsUUFBQSxFQUFjO0FBRVpJLE1BQUFBLEdBQUcsQ0FBSEEsR0FBQUEsQ0FBQUEsS0FBQUEsRUFBQUEsUUFBQUE7QUFGRixLQUFBLE1BR087QUFDTCxVQUFNQyxLQUFLLHFCQUFRQyxLQUFSLENBQVg7O0FBRUFDLE1BQUFBLE1BQU0sQ0FBTkEsY0FBQUEsQ0FBQUEsS0FBQUEsRUFBQUEsT0FBQUEsRUFBc0M7QUFDcENDLFFBQUFBLEdBRG9DLGlCQUM5QjtBQUNKLGNBQUksQ0FBQ1YsNkJBQTZCLENBQWxDLEtBQUEsRUFBMEM7QUFDeENXLFlBQUFBLE9BQU8sQ0FBUEEsSUFBQUEsQ0FBQUEsb1NBQUFBO0FBR0Q7O0FBRUQsaUJBQU9ILEtBQUssQ0FBWixLQUFBO0FBQ0Q7QUFUbUMsT0FBdENDO0FBWUFILE1BQUFBLEdBQUcsQ0FBSEEsR0FBQUEsQ0FBQUEsS0FBQUEsRUFBQUEsS0FBQUE7QUFDRDs7QUFFRCxXQUFBLEdBQUE7QUF4QmMsR0FBQSxFQXlCYixJQXpCSEosR0F5QkcsRUF6QmEsQ0FBaEJBO0FBMkJBLFNBQU9VLEtBQUssQ0FBTEEsSUFBQUEsQ0FBV1YsS0FBSyxDQUFMQSxPQUFBQSxDQUFsQixNQUFrQkEsRUFBWFUsQ0FBUDtBQUNEIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0ICogYXMgUmVhY3QgZnJvbSAncmVhY3QnO1xuaW1wb3J0IHR5cGUge1xuICBQYXJhbUxpc3RCYXNlLFxuICBOYXZpZ2F0aW9uU3RhdGUsXG4gIFJvdXRlLFxufSBmcm9tICdAcmVhY3QtbmF2aWdhdGlvbi9yb3V0ZXJzJztcbmltcG9ydCB0eXBlIHsgUm91dGVQcm9wIH0gZnJvbSAnLi90eXBlcyc7XG5cbnR5cGUgUm91dGVDYWNoZSA9IE1hcDxSb3V0ZTxzdHJpbmc+LCBSb3V0ZVByb3A8UGFyYW1MaXN0QmFzZSwgc3RyaW5nPj47XG5cbi8qKlxuICogVXRpbGl0ZXMgc3VjaCBhcyBgZ2V0Rm9jdXNlZFJvdXRlTmFtZUZyb21Sb3V0ZWAgbmVlZCB0byBhY2Nlc3Mgc3RhdGUuXG4gKiBTbyB3ZSBuZWVkIGEgd2F5IHRvIHN1cHByZXNzIHRoZSB3YXJuaW5nIGZvciB0aG9zZSB1c2UgY2FzZXMuXG4gKiBUaGlzIGlzIGZpbmUgc2luY2UgdGhleSBhcmUgaW50ZXJuYWwgdXRpbGl0aWVzIGFuZCB0aGlzIGlzIG5vdCBwdWJsaWMgQVBJLlxuICovXG5leHBvcnQgY29uc3QgU1VQUFJFU1NfU1RBVEVfQUNDRVNTX1dBUk5JTkcgPSB7IHZhbHVlOiBmYWxzZSB9O1xuXG4vKipcbiAqIEhvb2sgdG8gY2FjaGUgcm91dGUgcHJvcHMgZm9yIGVhY2ggc2NyZWVuIGluIHRoZSBuYXZpZ2F0b3IuXG4gKiBUaGlzIGxldHMgYWRkIHdhcm5pbmdzIGFuZCBtb2RpZmljYXRpb25zIHRvIHRoZSByb3V0ZSBvYmplY3QgYnV0IGtlZXAgcmVmZXJlbmNlcyBiZXR3ZWVuIHJlbmRlcnMuXG4gKi9cbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIHVzZVJvdXRlQ2FjaGU8U3RhdGUgZXh0ZW5kcyBOYXZpZ2F0aW9uU3RhdGU+KFxuICByb3V0ZXM6IFN0YXRlWydyb3V0ZXMnXVxuKSB7XG4gIC8vIENhY2hlIG9iamVjdCB3aGljaCBob2xkcyByb3V0ZSBvYmplY3RzIGZvciBlYWNoIHNjcmVlblxuICBjb25zdCBjYWNoZSA9IFJlYWN0LnVzZU1lbW8oKCkgPT4gKHsgY3VycmVudDogbmV3IE1hcCgpIGFzIFJvdXRlQ2FjaGUgfSksIFtdKTtcblxuICBpZiAocHJvY2Vzcy5lbnYuTk9ERV9FTlYgPT09ICdwcm9kdWN0aW9uJykge1xuICAgIC8vIFdlIGRvbid0IHdhbnQgdGhlIG92ZXJoZWFkIG9mIGNyZWF0aW5nIGV4dHJhIG1hcHMgZXZlcnkgcmVuZGVyIGluIHByb2RcbiAgICByZXR1cm4gcm91dGVzO1xuICB9XG5cbiAgY2FjaGUuY3VycmVudCA9IHJvdXRlcy5yZWR1Y2UoKGFjYywgcm91dGUpID0+IHtcbiAgICBjb25zdCBwcmV2aW91cyA9IGNhY2hlLmN1cnJlbnQuZ2V0KHJvdXRlKTtcblxuICAgIGlmIChwcmV2aW91cykge1xuICAgICAgLy8gSWYgYSBjYWNoZWQgcm91dGUgb2JqZWN0IGFscmVhZHkgZXhpc3RzLCByZXVzZSBpdFxuICAgICAgYWNjLnNldChyb3V0ZSwgcHJldmlvdXMpO1xuICAgIH0gZWxzZSB7XG4gICAgICBjb25zdCBwcm94eSA9IHsgLi4ucm91dGUgfTtcblxuICAgICAgT2JqZWN0LmRlZmluZVByb3BlcnR5KHByb3h5LCAnc3RhdGUnLCB7XG4gICAgICAgIGdldCgpIHtcbiAgICAgICAgICBpZiAoIVNVUFBSRVNTX1NUQVRFX0FDQ0VTU19XQVJOSU5HLnZhbHVlKSB7XG4gICAgICAgICAgICBjb25zb2xlLndhcm4oXG4gICAgICAgICAgICAgIFwiQWNjZXNzaW5nIHRoZSAnc3RhdGUnIHByb3BlcnR5IG9mIHRoZSAncm91dGUnIG9iamVjdCBpcyBub3Qgc3VwcG9ydGVkLiBJZiB5b3Ugd2FudCB0byBnZXQgdGhlIGZvY3VzZWQgcm91dGUgbmFtZSwgdXNlIHRoZSAnZ2V0Rm9jdXNlZFJvdXRlTmFtZUZyb21Sb3V0ZScgaGVscGVyIGluc3RlYWQ6IGh0dHBzOi8vcmVhY3RuYXZpZ2F0aW9uLm9yZy9kb2NzL3NjcmVlbi1vcHRpb25zLXJlc29sdXRpb24vI3NldHRpbmctcGFyZW50LXNjcmVlbi1vcHRpb25zLWJhc2VkLW9uLWNoaWxkLW5hdmlnYXRvcnMtc3RhdGVcIlxuICAgICAgICAgICAgKTtcbiAgICAgICAgICB9XG5cbiAgICAgICAgICByZXR1cm4gcm91dGUuc3RhdGU7XG4gICAgICAgIH0sXG4gICAgICB9KTtcblxuICAgICAgYWNjLnNldChyb3V0ZSwgcHJveHkpO1xuICAgIH1cblxuICAgIHJldHVybiBhY2M7XG4gIH0sIG5ldyBNYXAoKSBhcyBSb3V0ZUNhY2hlKTtcblxuICByZXR1cm4gQXJyYXkuZnJvbShjYWNoZS5jdXJyZW50LnZhbHVlcygpKTtcbn1cbiJdfQ==

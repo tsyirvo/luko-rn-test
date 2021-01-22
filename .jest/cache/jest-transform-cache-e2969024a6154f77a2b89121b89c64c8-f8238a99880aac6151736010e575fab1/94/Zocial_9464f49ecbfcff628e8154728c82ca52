@@ -1,0 +1,18 @@
+f92a439c9c131aac6d83c86a786dffd7
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _createIconSet = _interopRequireDefault(require("./createIconSet"));
+
+var _Zocial = _interopRequireDefault(require("./vendor/react-native-vector-icons/Fonts/Zocial.ttf"));
+
+var _Zocial2 = _interopRequireDefault(require("./vendor/react-native-vector-icons/glyphmaps/Zocial.json"));
+
+var _default = (0, _createIconSet.default)(_Zocial2.default, 'zocial', _Zocial.default);
+
+exports.default = _default;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL3NyYy9ab2NpYWwudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7OztBQUFBOztBQUNBOztBQUNBOztlQUVlLDRCQUFjLGdCQUFkLEVBQXdCLFFBQXhCLEVBQWtDLGVBQWxDLEMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgY3JlYXRlSWNvblNldCBmcm9tICcuL2NyZWF0ZUljb25TZXQnO1xuaW1wb3J0IGZvbnQgZnJvbSAnLi92ZW5kb3IvcmVhY3QtbmF0aXZlLXZlY3Rvci1pY29ucy9Gb250cy9ab2NpYWwudHRmJztcbmltcG9ydCBnbHlwaE1hcCBmcm9tICcuL3ZlbmRvci9yZWFjdC1uYXRpdmUtdmVjdG9yLWljb25zL2dseXBobWFwcy9ab2NpYWwuanNvbic7XG5cbmV4cG9ydCBkZWZhdWx0IGNyZWF0ZUljb25TZXQoZ2x5cGhNYXAsICd6b2NpYWwnLCBmb250KTtcbiJdLCJzb3VyY2VSb290IjoiIn0=

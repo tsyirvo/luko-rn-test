@@ -1,0 +1,25 @@
+54f322f64a9ec2cdd21229dc825f324d
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _exportNames = {};
+exports.default = void 0;
+
+var _AssetSourceResolver = _interopRequireWildcard(require("react-native/Libraries/Image/AssetSourceResolver"));
+
+Object.keys(_AssetSourceResolver).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (Object.prototype.hasOwnProperty.call(_exportNames, key)) return;
+  if (key in exports && exports[key] === _AssetSourceResolver[key]) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _AssetSourceResolver[key];
+    }
+  });
+});
+var _default = _AssetSourceResolver.default;
+exports.default = _default;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL3NyYy9Bc3NldFNvdXJjZVJlc29sdmVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7O0FBQUE7O0FBRUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtlQURlLDRCIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IEFzc2V0U291cmNlUmVzb2x2ZXIgZnJvbSAncmVhY3QtbmF0aXZlL0xpYnJhcmllcy9JbWFnZS9Bc3NldFNvdXJjZVJlc29sdmVyJztcbmV4cG9ydCBkZWZhdWx0IEFzc2V0U291cmNlUmVzb2x2ZXI7XG5leHBvcnQgKiBmcm9tICdyZWFjdC1uYXRpdmUvTGlicmFyaWVzL0ltYWdlL0Fzc2V0U291cmNlUmVzb2x2ZXInO1xuIl0sInNvdXJjZVJvb3QiOiIifQ==

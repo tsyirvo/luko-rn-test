@@ -1,0 +1,54 @@
+5c2b4c4c520c523368c8ac119d4a0954
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.GreyBox = exports.Flex = exports.Box = void 0;
+
+var _taggedTemplateLiteralLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/taggedTemplateLiteralLoose"));
+
+var _native = _interopRequireDefault(require("styled-components/native"));
+
+var _styledSystem = require("styled-system");
+
+function _templateObject3() {
+  var data = (0, _taggedTemplateLiteralLoose2.default)(["\n  background-color: ", ";\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = (0, _taggedTemplateLiteralLoose2.default)(["\n  flex: 1;\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = (0, _taggedTemplateLiteralLoose2.default)(["\n  ", "\n  ", "\n  ", "\n  ", "\n  ", "\n  ", "\n  ", "\n  ", "\n  ", "\n  ", "\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+var Box = _native.default.View(_templateObject(), _styledSystem.space, _styledSystem.layout, _styledSystem.background, _styledSystem.color, _styledSystem.border, _styledSystem.borderRadius, _styledSystem.position, _styledSystem.typography, _styledSystem.shadow, _styledSystem.flexbox);
+
+exports.Box = Box;
+var Flex = (0, _native.default)(Box)(_templateObject2());
+exports.Flex = Flex;
+var GreyBox = (0, _native.default)(Box)(_templateObject3(), function (p) {
+  return p.theme.colors.grey;
+});
+exports.GreyBox = GreyBox;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkJveC50c3giXSwibmFtZXMiOlsiQm94Iiwic3R5bGVkIiwiVmlldyIsInNwYWNlIiwibGF5b3V0IiwiYmFja2dyb3VuZCIsImNvbG9yIiwiYm9yZGVyIiwiYm9yZGVyUmFkaXVzIiwicG9zaXRpb24iLCJ0eXBvZ3JhcGh5Iiwic2hhZG93IiwiZmxleGJveCIsIkZsZXgiLCJHcmV5Qm94IiwicCIsInRoZW1lIiwiY29sb3JzIiwiZ3JleSJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBQUE7O0FBQ0E7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBZU8sSUFBTUEsR0FBRyxHQUFHQyxnQkFBT0MsSUFBVixvQkFDWkMsbUJBRFksRUFFWkMsb0JBRlksRUFHWkMsd0JBSFksRUFJWkMsbUJBSlksRUFLWkMsb0JBTFksRUFNWkMsMEJBTlksRUFPWkMsc0JBUFksRUFRWkMsd0JBUlksRUFTWkMsb0JBVFksRUFVWkMscUJBVlksQ0FBVDs7O0FBYUEsSUFBTUMsSUFBSSxHQUFHLHFCQUFPYixHQUFQLENBQUgsb0JBQVY7O0FBSUEsSUFBTWMsT0FBTyxHQUFHLHFCQUFPZCxHQUFQLENBQUgscUJBQ0UsVUFBQ2UsQ0FBRDtBQUFBLFNBQU9BLENBQUMsQ0FBQ0MsS0FBRixDQUFRQyxNQUFSLENBQWVDLElBQXRCO0FBQUEsQ0FERixDQUFiIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHN0eWxlZCBmcm9tICdzdHlsZWQtY29tcG9uZW50cy9uYXRpdmUnO1xuaW1wb3J0IHtcbiAgc3BhY2UsXG4gIGxheW91dCxcbiAgY29sb3IsXG4gIGZsZXhib3gsXG4gIGJhY2tncm91bmQsXG4gIGJvcmRlcixcbiAgYm9yZGVyUmFkaXVzLFxuICBwb3NpdGlvbixcbiAgc2hhZG93LFxuICB0eXBvZ3JhcGh5LFxufSBmcm9tICdzdHlsZWQtc3lzdGVtJztcblxuaW1wb3J0IHsgQm94UHJvcHMgfSBmcm9tICcuL0JveC50eXBlcyc7XG5cbmV4cG9ydCBjb25zdCBCb3ggPSBzdHlsZWQuVmlldzxCb3hQcm9wcz5gXG4gICR7c3BhY2V9XG4gICR7bGF5b3V0fVxuICAke2JhY2tncm91bmR9XG4gICR7Y29sb3J9XG4gICR7Ym9yZGVyfVxuICAke2JvcmRlclJhZGl1c31cbiAgJHtwb3NpdGlvbn1cbiAgJHt0eXBvZ3JhcGh5fVxuICAke3NoYWRvd31cbiAgJHtmbGV4Ym94fVxuYDtcblxuZXhwb3J0IGNvbnN0IEZsZXggPSBzdHlsZWQoQm94KWBcbiAgZmxleDogMTtcbmA7XG5cbmV4cG9ydCBjb25zdCBHcmV5Qm94ID0gc3R5bGVkKEJveClgXG4gIGJhY2tncm91bmQtY29sb3I6ICR7KHApID0+IHAudGhlbWUuY29sb3JzLmdyZXl9O1xuYDtcbiJdfQ==

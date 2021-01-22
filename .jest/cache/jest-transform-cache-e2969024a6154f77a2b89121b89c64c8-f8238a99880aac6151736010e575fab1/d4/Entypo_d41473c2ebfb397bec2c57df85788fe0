@@ -1,0 +1,18 @@
+b38065d7dbb2770cfeec87076ecaba1b
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _createIconSet = _interopRequireDefault(require("./createIconSet"));
+
+var _Entypo = _interopRequireDefault(require("./vendor/react-native-vector-icons/Fonts/Entypo.ttf"));
+
+var _Entypo2 = _interopRequireDefault(require("./vendor/react-native-vector-icons/glyphmaps/Entypo.json"));
+
+var _default = (0, _createIconSet.default)(_Entypo2.default, 'entypo', _Entypo.default);
+
+exports.default = _default;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL3NyYy9FbnR5cG8udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7OztBQUFBOztBQUNBOztBQUNBOztlQUVlLDRCQUFjLGdCQUFkLEVBQXdCLFFBQXhCLEVBQWtDLGVBQWxDLEMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgY3JlYXRlSWNvblNldCBmcm9tICcuL2NyZWF0ZUljb25TZXQnO1xuaW1wb3J0IGZvbnQgZnJvbSAnLi92ZW5kb3IvcmVhY3QtbmF0aXZlLXZlY3Rvci1pY29ucy9Gb250cy9FbnR5cG8udHRmJztcbmltcG9ydCBnbHlwaE1hcCBmcm9tICcuL3ZlbmRvci9yZWFjdC1uYXRpdmUtdmVjdG9yLWljb25zL2dseXBobWFwcy9FbnR5cG8uanNvbic7XG5cbmV4cG9ydCBkZWZhdWx0IGNyZWF0ZUljb25TZXQoZ2x5cGhNYXAsICdlbnR5cG8nLCBmb250KTtcbiJdLCJzb3VyY2VSb290IjoiIn0=

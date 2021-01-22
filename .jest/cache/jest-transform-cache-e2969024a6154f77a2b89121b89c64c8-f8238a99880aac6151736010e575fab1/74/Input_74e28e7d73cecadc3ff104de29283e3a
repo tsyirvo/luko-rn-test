@@ -1,0 +1,66 @@
+6680aedd1462845d25ac90227d1b8bfb
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
+
+var _taggedTemplateLiteralLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/taggedTemplateLiteralLoose"));
+
+var _react = _interopRequireDefault(require("react"));
+
+var _reactNative = require("react-native");
+
+var _native = _interopRequireDefault(require("styled-components/native"));
+
+var _theme = _interopRequireDefault(require("../../../../styles/theme"));
+
+var _Box = require("../Box");
+
+var _Text = require("../Text");
+
+function _templateObject() {
+  var data = (0, _taggedTemplateLiteralLoose2.default)(["\n  border-bottom-color: ", ";\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+var styles = {
+  fontSize: _theme.default.fontSizes.regular,
+  borderBottomWidth: 1,
+  padding: 0,
+  paddingBottom: 5
+};
+var STextInput = (0, _native.default)(_reactNative.TextInput)(_templateObject(), function (p) {
+  return p.theme.colors.blueGrey;
+});
+
+var Input = function Input(_ref) {
+  var label = _ref.label,
+      props = (0, _objectWithoutProperties2.default)(_ref, ["label"]);
+  return _react.default.createElement(_Box.Box, {
+    width: "100%",
+    mt: "large"
+  }, label && _react.default.createElement(_Text.Text, {
+    color: "blueGrey",
+    mb: "small",
+    testID: "input-label"
+  }, label), _react.default.createElement(STextInput, (0, _extends2.default)({
+    style: styles,
+    underlineColorAndroid: "transparent",
+    placeholderTextColor: _theme.default.colors.blueGrey
+  }, props)));
+};
+
+var _default = Input;
+exports.default = _default;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIklucHV0LnRzeCJdLCJuYW1lcyI6WyJzdHlsZXMiLCJmb250U2l6ZSIsInRoZW1lIiwiZm9udFNpemVzIiwicmVndWxhciIsImJvcmRlckJvdHRvbVdpZHRoIiwicGFkZGluZyIsInBhZGRpbmdCb3R0b20iLCJTVGV4dElucHV0IiwiVGV4dElucHV0IiwicCIsImNvbG9ycyIsImJsdWVHcmV5IiwiSW5wdXQiLCJsYWJlbCIsInByb3BzIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7O0FBQUE7O0FBQ0E7O0FBQ0E7O0FBRUE7O0FBQ0E7O0FBQ0E7Ozs7Ozs7Ozs7OztBQU1BLElBQU1BLE1BQU0sR0FBRztBQUNiQyxFQUFBQSxRQUFRLEVBQUVDLGVBQU1DLFNBQU4sQ0FBZ0JDLE9BRGI7QUFFYkMsRUFBQUEsaUJBQWlCLEVBQUUsQ0FGTjtBQUdiQyxFQUFBQSxPQUFPLEVBQUUsQ0FISTtBQUliQyxFQUFBQSxhQUFhLEVBQUU7QUFKRixDQUFmO0FBT0EsSUFBTUMsVUFBVSxHQUFHLHFCQUFPQyxzQkFBUCxDQUFILG9CQUNTLFVBQUNDLENBQUQ7QUFBQSxTQUFPQSxDQUFDLENBQUNSLEtBQUYsQ0FBUVMsTUFBUixDQUFlQyxRQUF0QjtBQUFBLENBRFQsQ0FBaEI7O0FBSUEsSUFBTUMsS0FBSyxHQUFHLFNBQVJBLEtBQVE7QUFBQSxNQUFHQyxLQUFILFFBQUdBLEtBQUg7QUFBQSxNQUFhQyxLQUFiO0FBQUEsU0FDWiw2QkFBQyxRQUFEO0FBQUssSUFBQSxLQUFLLEVBQUMsTUFBWDtBQUFrQixJQUFBLEVBQUUsRUFBQztBQUFyQixLQUNHRCxLQUFLLElBQ0osNkJBQUMsVUFBRDtBQUFNLElBQUEsS0FBSyxFQUFDLFVBQVo7QUFBdUIsSUFBQSxFQUFFLEVBQUMsT0FBMUI7QUFBa0MsSUFBQSxNQUFNLEVBQUM7QUFBekMsS0FDR0EsS0FESCxDQUZKLEVBT0UsNkJBQUMsVUFBRDtBQUNFLElBQUEsS0FBSyxFQUFFZCxNQURUO0FBRUUsSUFBQSxxQkFBcUIsRUFBQyxhQUZ4QjtBQUdFLElBQUEsb0JBQW9CLEVBQUVFLGVBQU1TLE1BQU4sQ0FBYUM7QUFIckMsS0FJTUcsS0FKTixFQVBGLENBRFk7QUFBQSxDQUFkOztlQWlCZUYsSyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBSZWFjdCBmcm9tICdyZWFjdCc7XG5pbXBvcnQgeyBUZXh0SW5wdXQsIFRleHRJbnB1dFByb3BzIH0gZnJvbSAncmVhY3QtbmF0aXZlJztcbmltcG9ydCBzdHlsZWQgZnJvbSAnc3R5bGVkLWNvbXBvbmVudHMvbmF0aXZlJztcblxuaW1wb3J0IHRoZW1lIGZyb20gJy4uLy4uLy4uLy4uL3N0eWxlcy90aGVtZSc7XG5pbXBvcnQgeyBCb3ggfSBmcm9tICcuLi9Cb3gnO1xuaW1wb3J0IHsgVGV4dCB9IGZyb20gJy4uL1RleHQnO1xuXG50eXBlIFByb3BzID0gVGV4dElucHV0UHJvcHMgJiB7XG4gIGxhYmVsOiBzdHJpbmc7XG59O1xuXG5jb25zdCBzdHlsZXMgPSB7XG4gIGZvbnRTaXplOiB0aGVtZS5mb250U2l6ZXMucmVndWxhcixcbiAgYm9yZGVyQm90dG9tV2lkdGg6IDEsXG4gIHBhZGRpbmc6IDAsXG4gIHBhZGRpbmdCb3R0b206IDUsXG59O1xuXG5jb25zdCBTVGV4dElucHV0ID0gc3R5bGVkKFRleHRJbnB1dCk8eyBlcnJvcj86IHN0cmluZyB9PmBcbiAgYm9yZGVyLWJvdHRvbS1jb2xvcjogJHsocCkgPT4gcC50aGVtZS5jb2xvcnMuYmx1ZUdyZXl9O1xuYDtcblxuY29uc3QgSW5wdXQgPSAoeyBsYWJlbCwgLi4ucHJvcHMgfTogUHJvcHMpID0+IChcbiAgPEJveCB3aWR0aD1cIjEwMCVcIiBtdD1cImxhcmdlXCI+XG4gICAge2xhYmVsICYmIChcbiAgICAgIDxUZXh0IGNvbG9yPVwiYmx1ZUdyZXlcIiBtYj1cInNtYWxsXCIgdGVzdElEPVwiaW5wdXQtbGFiZWxcIj5cbiAgICAgICAge2xhYmVsfVxuICAgICAgPC9UZXh0PlxuICAgICl9XG5cbiAgICA8U1RleHRJbnB1dFxuICAgICAgc3R5bGU9e3N0eWxlc31cbiAgICAgIHVuZGVybGluZUNvbG9yQW5kcm9pZD1cInRyYW5zcGFyZW50XCJcbiAgICAgIHBsYWNlaG9sZGVyVGV4dENvbG9yPXt0aGVtZS5jb2xvcnMuYmx1ZUdyZXl9XG4gICAgICB7Li4ucHJvcHN9XG4gICAgLz5cbiAgPC9Cb3g+XG4pO1xuXG5leHBvcnQgZGVmYXVsdCBJbnB1dDtcbiJdfQ==

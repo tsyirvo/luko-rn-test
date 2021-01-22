@@ -1,0 +1,21 @@
+283a4ca8a55c40c8e25e33a7215ab5b7
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+var _createIconSet = _interopRequireDefault(require("./createIconSet"));
+
+function _default(config, expoFontName, expoAssetId) {
+  var glyphMap = {};
+  config.icons.forEach(function (icon) {
+    icon.properties.name.split(/\s*,\s*/g).forEach(function (name) {
+      glyphMap[name] = icon.properties.code;
+    });
+  });
+  var fontFamily = expoFontName || config.preferences.fontPref.metadata.fontFamily;
+  return (0, _createIconSet.default)(glyphMap, fontFamily, expoAssetId || fontFamily + ".ttf");
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL3NyYy9jcmVhdGVJY29uU2V0RnJvbUljb01vb24udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7OztBQUFBOztBQUVjLGtCQUFXLE1BQVgsRUFBbUIsWUFBbkIsRUFBaUMsV0FBakMsRUFBNEM7QUFDeEQsTUFBTSxRQUFRLEdBQUcsRUFBakI7QUFDQSxFQUFBLE1BQU0sQ0FBQyxLQUFQLENBQWEsT0FBYixDQUFxQixVQUFBLElBQUksRUFBRztBQUMxQixJQUFBLElBQUksQ0FBQyxVQUFMLENBQWdCLElBQWhCLENBQXFCLEtBQXJCLENBQTJCLFVBQTNCLEVBQXVDLE9BQXZDLENBQStDLFVBQUEsSUFBSSxFQUFHO0FBQ3BELE1BQUEsUUFBUSxDQUFDLElBQUQsQ0FBUixHQUFpQixJQUFJLENBQUMsVUFBTCxDQUFnQixJQUFqQztBQUNELEtBRkQ7QUFHRCxHQUpEO0FBTUEsTUFBTSxVQUFVLEdBQ2QsWUFBWSxJQUFJLE1BQU0sQ0FBQyxXQUFQLENBQW1CLFFBQW5CLENBQTRCLFFBQTVCLENBQXFDLFVBRHZEO0FBR0EsU0FBTyw0QkFDTCxRQURLLEVBRUwsVUFGSyxFQUdMLFdBQVcsSUFBTyxVQUFQLFNBSE4sQ0FBUDtBQUtEIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IGNyZWF0ZUljb25TZXQgZnJvbSBcIi4vY3JlYXRlSWNvblNldFwiO1xuXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiAoY29uZmlnLCBleHBvRm9udE5hbWUsIGV4cG9Bc3NldElkKSB7XG4gIGNvbnN0IGdseXBoTWFwID0ge307XG4gIGNvbmZpZy5pY29ucy5mb3JFYWNoKGljb24gPT4ge1xuICAgIGljb24ucHJvcGVydGllcy5uYW1lLnNwbGl0KC9cXHMqLFxccyovZykuZm9yRWFjaChuYW1lID0+IHtcbiAgICAgIGdseXBoTWFwW25hbWVdID0gaWNvbi5wcm9wZXJ0aWVzLmNvZGU7XG4gICAgfSk7XG4gIH0pO1xuXG4gIGNvbnN0IGZvbnRGYW1pbHkgPVxuICAgIGV4cG9Gb250TmFtZSB8fCBjb25maWcucHJlZmVyZW5jZXMuZm9udFByZWYubWV0YWRhdGEuZm9udEZhbWlseTtcblxuICByZXR1cm4gY3JlYXRlSWNvblNldDxzdHJpbmcsIHN0cmluZz4oXG4gICAgZ2x5cGhNYXAsXG4gICAgZm9udEZhbWlseSxcbiAgICBleHBvQXNzZXRJZCB8fCBgJHtmb250RmFtaWx5fS50dGZgXG4gICk7XG59XG4iXSwic291cmNlUm9vdCI6IiJ9

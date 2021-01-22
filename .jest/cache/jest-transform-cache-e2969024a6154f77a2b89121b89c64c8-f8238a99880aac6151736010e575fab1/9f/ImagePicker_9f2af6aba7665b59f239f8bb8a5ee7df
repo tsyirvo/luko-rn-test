@@ -1,0 +1,255 @@
+03636ea004e1e66ba5a7b65b5c01a31e
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getCameraPermissionsAsync = getCameraPermissionsAsync;
+exports.getCameraRollPermissionsAsync = getCameraRollPermissionsAsync;
+exports.getMediaLibraryPermissionsAsync = getMediaLibraryPermissionsAsync;
+exports.requestCameraPermissionsAsync = requestCameraPermissionsAsync;
+exports.requestCameraRollPermissionsAsync = requestCameraRollPermissionsAsync;
+exports.requestMediaLibraryPermissionsAsync = requestMediaLibraryPermissionsAsync;
+exports.getPendingResultAsync = getPendingResultAsync;
+exports.launchCameraAsync = launchCameraAsync;
+exports.launchImageLibraryAsync = launchImageLibraryAsync;
+Object.defineProperty(exports, "PermissionStatus", {
+  enumerable: true,
+  get: function get() {
+    return _unimodulesPermissionsInterface.PermissionStatus;
+  }
+});
+Object.defineProperty(exports, "MediaTypeOptions", {
+  enumerable: true,
+  get: function get() {
+    return _ImagePicker.MediaTypeOptions;
+  }
+});
+Object.defineProperty(exports, "VideoExportPreset", {
+  enumerable: true,
+  get: function get() {
+    return _ImagePicker.VideoExportPreset;
+  }
+});
+
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
+var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
+
+var _core = require("@unimodules/core");
+
+var _unimodulesPermissionsInterface = require("unimodules-permissions-interface");
+
+var _ExponentImagePicker = _interopRequireDefault(require("./ExponentImagePicker"));
+
+var _ImagePicker = require("./ImagePicker.types");
+
+function validateOptions(options) {
+  var aspect = options.aspect,
+      quality = options.quality,
+      videoMaxDuration = options.videoMaxDuration;
+
+  if (aspect != null) {
+    var _aspect = (0, _slicedToArray2.default)(aspect, 2),
+        x = _aspect[0],
+        y = _aspect[1];
+
+    if (x <= 0 || y <= 0) {
+      throw new _core.CodedError('ERR_INVALID_ARGUMENT', "Invalid aspect ratio values " + x + ":" + y + ". Provide positive numbers.");
+    }
+  }
+
+  if (quality && (quality < 0 || quality > 1)) {
+    throw new _core.CodedError('ERR_INVALID_ARGUMENT', "Invalid 'quality' value " + quality + ". Provide a value between 0 and 1.");
+  }
+
+  if (videoMaxDuration && videoMaxDuration < 0) {
+    throw new _core.CodedError('ERR_INVALID_ARGUMENT', "Invalid 'videoMaxDuration' value " + videoMaxDuration + ". Provide a non-negative number.");
+  }
+
+  return options;
+}
+
+function getCameraPermissionsAsync() {
+  return _regenerator.default.async(function getCameraPermissionsAsync$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          return _context.abrupt("return", _ExponentImagePicker.default.getCameraPermissionsAsync());
+
+        case 1:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, null, null, null, Promise);
+}
+
+function getCameraRollPermissionsAsync() {
+  return _regenerator.default.async(function getCameraRollPermissionsAsync$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          console.warn('ImagePicker.getCameraRollPermissionsAsync() is deprecated in favour of ImagePicker.getMediaLibraryPermissionsAsync()');
+          return _context2.abrupt("return", getMediaLibraryPermissionsAsync());
+
+        case 2:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  }, null, null, null, Promise);
+}
+
+function getMediaLibraryPermissionsAsync() {
+  var writeOnly,
+      imagePickerMethod,
+      _args3 = arguments;
+  return _regenerator.default.async(function getMediaLibraryPermissionsAsync$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          writeOnly = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : false;
+          imagePickerMethod = typeof _ExponentImagePicker.default.getMediaLibaryPermissionsAsync === 'function' ? _ExponentImagePicker.default.getMediaLibaryPermissionsAsync : _ExponentImagePicker.default.getMediaLibraryPermissionsAsync;
+          return _context3.abrupt("return", imagePickerMethod(writeOnly));
+
+        case 3:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  }, null, null, null, Promise);
+}
+
+function requestCameraPermissionsAsync() {
+  return _regenerator.default.async(function requestCameraPermissionsAsync$(_context4) {
+    while (1) {
+      switch (_context4.prev = _context4.next) {
+        case 0:
+          return _context4.abrupt("return", _ExponentImagePicker.default.requestCameraPermissionsAsync());
+
+        case 1:
+        case "end":
+          return _context4.stop();
+      }
+    }
+  }, null, null, null, Promise);
+}
+
+function requestCameraRollPermissionsAsync() {
+  return _regenerator.default.async(function requestCameraRollPermissionsAsync$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
+          console.warn('ImagePicker.requestCameraRollPermissionsAsync() is deprecated in favour of ImagePicker.requestMediaLibraryPermissionsAsync()');
+          return _context5.abrupt("return", requestMediaLibraryPermissionsAsync());
+
+        case 2:
+        case "end":
+          return _context5.stop();
+      }
+    }
+  }, null, null, null, Promise);
+}
+
+function requestMediaLibraryPermissionsAsync() {
+  var writeOnly,
+      imagePickerMethod,
+      _args6 = arguments;
+  return _regenerator.default.async(function requestMediaLibraryPermissionsAsync$(_context6) {
+    while (1) {
+      switch (_context6.prev = _context6.next) {
+        case 0:
+          writeOnly = _args6.length > 0 && _args6[0] !== undefined ? _args6[0] : false;
+          imagePickerMethod = typeof _ExponentImagePicker.default.requestMediaLibaryPermissionsAsync === 'function' ? _ExponentImagePicker.default.requestMediaLibaryPermissionsAsync : _ExponentImagePicker.default.requestMediaLibraryPermissionsAsync;
+          return _context6.abrupt("return", imagePickerMethod(writeOnly));
+
+        case 3:
+        case "end":
+          return _context6.stop();
+      }
+    }
+  }, null, null, null, Promise);
+}
+
+function getPendingResultAsync() {
+  return _regenerator.default.async(function getPendingResultAsync$(_context7) {
+    while (1) {
+      switch (_context7.prev = _context7.next) {
+        case 0:
+          if (!_ExponentImagePicker.default.getPendingResultAsync) {
+            _context7.next = 2;
+            break;
+          }
+
+          return _context7.abrupt("return", _ExponentImagePicker.default.getPendingResultAsync());
+
+        case 2:
+          return _context7.abrupt("return", []);
+
+        case 3:
+        case "end":
+          return _context7.stop();
+      }
+    }
+  }, null, null, null, Promise);
+}
+
+function launchCameraAsync() {
+  var options,
+      _args8 = arguments;
+  return _regenerator.default.async(function launchCameraAsync$(_context8) {
+    while (1) {
+      switch (_context8.prev = _context8.next) {
+        case 0:
+          options = _args8.length > 0 && _args8[0] !== undefined ? _args8[0] : {};
+
+          if (_ExponentImagePicker.default.launchCameraAsync) {
+            _context8.next = 3;
+            break;
+          }
+
+          throw new _core.UnavailabilityError('ImagePicker', 'launchCameraAsync');
+
+        case 3:
+          _context8.next = 5;
+          return _regenerator.default.awrap(_ExponentImagePicker.default.launchCameraAsync(validateOptions(options)));
+
+        case 5:
+          return _context8.abrupt("return", _context8.sent);
+
+        case 6:
+        case "end":
+          return _context8.stop();
+      }
+    }
+  }, null, null, null, Promise);
+}
+
+function launchImageLibraryAsync(options) {
+  return _regenerator.default.async(function launchImageLibraryAsync$(_context9) {
+    while (1) {
+      switch (_context9.prev = _context9.next) {
+        case 0:
+          if (_ExponentImagePicker.default.launchImageLibraryAsync) {
+            _context9.next = 2;
+            break;
+          }
+
+          throw new _core.UnavailabilityError('ImagePicker', 'launchImageLibraryAsync');
+
+        case 2:
+          _context9.next = 4;
+          return _regenerator.default.awrap(_ExponentImagePicker.default.launchImageLibraryAsync(options != null ? options : {}));
+
+        case 4:
+          return _context9.abrupt("return", _context9.sent);
+
+        case 5:
+        case "end":
+          return _context9.stop();
+      }
+    }
+  }, null, null, null, Promise);
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL3NyYy9JbWFnZVBpY2tlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUE7O0FBQ0E7O0FBRUE7O0FBQ0E7O0FBWUEsU0FBUyxlQUFULENBQXlCLE9BQXpCLEVBQW9EO0FBQUEsTUFDMUMsTUFEMEMsR0FDSixPQURJLENBQzFDLE1BRDBDO0FBQUEsTUFDbEMsT0FEa0MsR0FDSixPQURJLENBQ2xDLE9BRGtDO0FBQUEsTUFDekIsZ0JBRHlCLEdBQ0osT0FESSxDQUN6QixnQkFEeUI7O0FBR2xELE1BQUksTUFBTSxJQUFJLElBQWQsRUFBb0I7QUFBQSwrQ0FDSCxNQURHO0FBQUEsUUFDWCxDQURXO0FBQUEsUUFDUixDQURROztBQUdsQixRQUFJLENBQUMsSUFBSSxDQUFMLElBQVUsQ0FBQyxJQUFJLENBQW5CLEVBQXNCO0FBQ3BCLFlBQU0sSUFBSSxnQkFBSixDQUNKLHNCQURJLG1DQUUyQixDQUYzQixTQUVnQyxDQUZoQyxpQ0FBTjtBQUlEO0FBQ0Y7O0FBRUQsTUFBSSxPQUFPLEtBQUssT0FBTyxHQUFHLENBQVYsSUFBZSxPQUFPLEdBQUcsQ0FBOUIsQ0FBWCxFQUE2QztBQUMzQyxVQUFNLElBQUksZ0JBQUosQ0FDSixzQkFESSwrQkFFdUIsT0FGdkIsd0NBQU47QUFJRDs7QUFFRCxNQUFJLGdCQUFnQixJQUFJLGdCQUFnQixHQUFHLENBQTNDLEVBQThDO0FBQzVDLFVBQU0sSUFBSSxnQkFBSixDQUNKLHNCQURJLHdDQUVnQyxnQkFGaEMsc0NBQU47QUFJRDs7QUFFRCxTQUFPLE9BQVA7QUFDRDs7QUFFTSxTQUFlLHlCQUFmO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQSwyQ0FDRSw2QkFBb0IseUJBQXBCLEVBREY7O0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7O0FBT0EsU0FBZSw2QkFBZjtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQ0wsVUFBQSxPQUFPLENBQUMsSUFBUixDQUNFLHNIQURGO0FBREssNENBSUUsK0JBQStCLEVBSmpDOztBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBOztBQU9BLFNBQWUsK0JBQWY7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUNMLFVBQUEsU0FESyw4REFDZ0IsS0FEaEI7QUFLQyxVQUFBLGlCQUxELEdBTUgsT0FBTyw2QkFBb0IsOEJBQTNCLEtBQThELFVBQTlELEdBQ0ksNkJBQW9CLDhCQUR4QixHQUVJLDZCQUFvQiwrQkFSckI7QUFBQSw0Q0FVRSxpQkFBaUIsQ0FBQyxTQUFELENBVm5COztBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBOztBQWFBLFNBQWUsNkJBQWY7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLDRDQUNFLDZCQUFvQiw2QkFBcEIsRUFERjs7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTs7QUFPQSxTQUFlLGlDQUFmO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFDTCxVQUFBLE9BQU8sQ0FBQyxJQUFSLENBQ0UsOEhBREY7QUFESyw0Q0FJRSxtQ0FBbUMsRUFKckM7O0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7O0FBT0EsU0FBZSxtQ0FBZjtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQ0wsVUFBQSxTQURLLDhEQUNnQixLQURoQjtBQUtDLFVBQUEsaUJBTEQsR0FNSCxPQUFPLDZCQUFvQixrQ0FBM0IsS0FBa0UsVUFBbEUsR0FDSSw2QkFBb0Isa0NBRHhCLEdBRUksNkJBQW9CLG1DQVJyQjtBQUFBLDRDQVVFLGlCQUFpQixDQUFDLFNBQUQsQ0FWbkI7O0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7O0FBYUEsU0FBZSxxQkFBZjtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUEsZUFHRCw2QkFBb0IscUJBSG5CO0FBQUE7QUFBQTtBQUFBOztBQUFBLDRDQUlJLDZCQUFvQixxQkFBcEIsRUFKSjs7QUFBQTtBQUFBLDRDQU1FLEVBTkY7O0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7O0FBU0EsU0FBZSxpQkFBZjtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUNMLFVBQUEsT0FESyw4REFDeUIsRUFEekI7O0FBQUEsY0FHQSw2QkFBb0IsaUJBSHBCO0FBQUE7QUFBQTtBQUFBOztBQUFBLGdCQUlHLElBQUkseUJBQUosQ0FBd0IsYUFBeEIsRUFBdUMsbUJBQXZDLENBSkg7O0FBQUE7QUFBQTtBQUFBLDRDQU1RLDZCQUFvQixpQkFBcEIsQ0FBc0MsZUFBZSxDQUFDLE9BQUQsQ0FBckQsQ0FOUjs7QUFBQTtBQUFBOztBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBOztBQVNBLFNBQWUsdUJBQWYsQ0FDTCxPQURLO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQSxjQUdBLDZCQUFvQix1QkFIcEI7QUFBQTtBQUFBO0FBQUE7O0FBQUEsZ0JBSUcsSUFBSSx5QkFBSixDQUF3QixhQUF4QixFQUF1Qyx5QkFBdkMsQ0FKSDs7QUFBQTtBQUFBO0FBQUEsNENBTVEsNkJBQW9CLHVCQUFwQixDQUE0QyxPQUE1QyxXQUE0QyxPQUE1QyxHQUF1RCxFQUF2RCxDQU5SOztBQUFBO0FBQUE7O0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUEiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBVbmF2YWlsYWJpbGl0eUVycm9yLCBDb2RlZEVycm9yIH0gZnJvbSAnQHVuaW1vZHVsZXMvY29yZSc7XG5pbXBvcnQgeyBQZXJtaXNzaW9uU3RhdHVzLCBQZXJtaXNzaW9uRXhwaXJhdGlvbiB9IGZyb20gJ3VuaW1vZHVsZXMtcGVybWlzc2lvbnMtaW50ZXJmYWNlJztcblxuaW1wb3J0IEV4cG9uZW50SW1hZ2VQaWNrZXIgZnJvbSAnLi9FeHBvbmVudEltYWdlUGlja2VyJztcbmltcG9ydCB7XG4gIENhbWVyYVBlcm1pc3Npb25SZXNwb25zZSxcbiAgQ2FtZXJhUm9sbFBlcm1pc3Npb25SZXNwb25zZSxcbiAgTWVkaWFMaWJyYXJ5UGVybWlzc2lvblJlc3BvbnNlLFxuICBJbWFnZVBpY2tlclJlc3VsdCxcbiAgSW1hZ2VQaWNrZXJFcnJvclJlc3VsdCxcbiAgTWVkaWFUeXBlT3B0aW9ucyxcbiAgSW1hZ2VQaWNrZXJPcHRpb25zLFxuICBWaWRlb0V4cG9ydFByZXNldCxcbiAgRXhwYW5kSW1hZ2VQaWNrZXJSZXN1bHQsXG59IGZyb20gJy4vSW1hZ2VQaWNrZXIudHlwZXMnO1xuXG5mdW5jdGlvbiB2YWxpZGF0ZU9wdGlvbnMob3B0aW9uczogSW1hZ2VQaWNrZXJPcHRpb25zKSB7XG4gIGNvbnN0IHsgYXNwZWN0LCBxdWFsaXR5LCB2aWRlb01heER1cmF0aW9uIH0gPSBvcHRpb25zO1xuXG4gIGlmIChhc3BlY3QgIT0gbnVsbCkge1xuICAgIGNvbnN0IFt4LCB5XSA9IGFzcGVjdDtcblxuICAgIGlmICh4IDw9IDAgfHwgeSA8PSAwKSB7XG4gICAgICB0aHJvdyBuZXcgQ29kZWRFcnJvcihcbiAgICAgICAgJ0VSUl9JTlZBTElEX0FSR1VNRU5UJyxcbiAgICAgICAgYEludmFsaWQgYXNwZWN0IHJhdGlvIHZhbHVlcyAke3h9OiR7eX0uIFByb3ZpZGUgcG9zaXRpdmUgbnVtYmVycy5gXG4gICAgICApO1xuICAgIH1cbiAgfVxuXG4gIGlmIChxdWFsaXR5ICYmIChxdWFsaXR5IDwgMCB8fCBxdWFsaXR5ID4gMSkpIHtcbiAgICB0aHJvdyBuZXcgQ29kZWRFcnJvcihcbiAgICAgICdFUlJfSU5WQUxJRF9BUkdVTUVOVCcsXG4gICAgICBgSW52YWxpZCAncXVhbGl0eScgdmFsdWUgJHtxdWFsaXR5fS4gUHJvdmlkZSBhIHZhbHVlIGJldHdlZW4gMCBhbmQgMS5gXG4gICAgKTtcbiAgfVxuXG4gIGlmICh2aWRlb01heER1cmF0aW9uICYmIHZpZGVvTWF4RHVyYXRpb24gPCAwKSB7XG4gICAgdGhyb3cgbmV3IENvZGVkRXJyb3IoXG4gICAgICAnRVJSX0lOVkFMSURfQVJHVU1FTlQnLFxuICAgICAgYEludmFsaWQgJ3ZpZGVvTWF4RHVyYXRpb24nIHZhbHVlICR7dmlkZW9NYXhEdXJhdGlvbn0uIFByb3ZpZGUgYSBub24tbmVnYXRpdmUgbnVtYmVyLmBcbiAgICApO1xuICB9XG5cbiAgcmV0dXJuIG9wdGlvbnM7XG59XG5cbmV4cG9ydCBhc3luYyBmdW5jdGlvbiBnZXRDYW1lcmFQZXJtaXNzaW9uc0FzeW5jKCk6IFByb21pc2U8Q2FtZXJhUGVybWlzc2lvblJlc3BvbnNlPiB7XG4gIHJldHVybiBFeHBvbmVudEltYWdlUGlja2VyLmdldENhbWVyYVBlcm1pc3Npb25zQXN5bmMoKTtcbn1cblxuLyoqXG4gKiBAZGVwcmVjYXRlZCBpbiBmYXZvciBvZiBnZXRNZWRpYUxpYnJhcnlQZXJtaXNzaW9uc0FzeW5jKClcbiAqL1xuZXhwb3J0IGFzeW5jIGZ1bmN0aW9uIGdldENhbWVyYVJvbGxQZXJtaXNzaW9uc0FzeW5jKCk6IFByb21pc2U8TWVkaWFMaWJyYXJ5UGVybWlzc2lvblJlc3BvbnNlPiB7XG4gIGNvbnNvbGUud2FybihcbiAgICAnSW1hZ2VQaWNrZXIuZ2V0Q2FtZXJhUm9sbFBlcm1pc3Npb25zQXN5bmMoKSBpcyBkZXByZWNhdGVkIGluIGZhdm91ciBvZiBJbWFnZVBpY2tlci5nZXRNZWRpYUxpYnJhcnlQZXJtaXNzaW9uc0FzeW5jKCknXG4gICk7XG4gIHJldHVybiBnZXRNZWRpYUxpYnJhcnlQZXJtaXNzaW9uc0FzeW5jKCk7XG59XG5cbmV4cG9ydCBhc3luYyBmdW5jdGlvbiBnZXRNZWRpYUxpYnJhcnlQZXJtaXNzaW9uc0FzeW5jKFxuICB3cml0ZU9ubHk6IGJvb2xlYW4gPSBmYWxzZVxuKTogUHJvbWlzZTxNZWRpYUxpYnJhcnlQZXJtaXNzaW9uUmVzcG9uc2U+IHtcbiAgLy8gZHVlIHRvIGEgdHlwbyBpbiBpT1MsIHdlIG5lZWQgdG8gY2hlY2sgb24gdGhlIHR5cG8gdG9vXG4gIC8vIHRvZG86IHJlbW92ZSB0aGlzIHdvcmthcm91bmQgZm9yIFNESyA0MVxuICBjb25zdCBpbWFnZVBpY2tlck1ldGhvZCA9XG4gICAgdHlwZW9mIEV4cG9uZW50SW1hZ2VQaWNrZXIuZ2V0TWVkaWFMaWJhcnlQZXJtaXNzaW9uc0FzeW5jID09PSAnZnVuY3Rpb24nXG4gICAgICA/IEV4cG9uZW50SW1hZ2VQaWNrZXIuZ2V0TWVkaWFMaWJhcnlQZXJtaXNzaW9uc0FzeW5jXG4gICAgICA6IEV4cG9uZW50SW1hZ2VQaWNrZXIuZ2V0TWVkaWFMaWJyYXJ5UGVybWlzc2lvbnNBc3luYztcblxuICByZXR1cm4gaW1hZ2VQaWNrZXJNZXRob2Qod3JpdGVPbmx5KTtcbn1cblxuZXhwb3J0IGFzeW5jIGZ1bmN0aW9uIHJlcXVlc3RDYW1lcmFQZXJtaXNzaW9uc0FzeW5jKCk6IFByb21pc2U8Q2FtZXJhUGVybWlzc2lvblJlc3BvbnNlPiB7XG4gIHJldHVybiBFeHBvbmVudEltYWdlUGlja2VyLnJlcXVlc3RDYW1lcmFQZXJtaXNzaW9uc0FzeW5jKCk7XG59XG5cbi8qKlxuICogQGRlcHJlY2F0ZWQgaW4gZmF2b3Igb2YgcmVxdWVzdE1lZGlhTGlicmFyeVBlcm1pc3Npb25zQXN5bmMoKVxuICovXG5leHBvcnQgYXN5bmMgZnVuY3Rpb24gcmVxdWVzdENhbWVyYVJvbGxQZXJtaXNzaW9uc0FzeW5jKCk6IFByb21pc2U8TWVkaWFMaWJyYXJ5UGVybWlzc2lvblJlc3BvbnNlPiB7XG4gIGNvbnNvbGUud2FybihcbiAgICAnSW1hZ2VQaWNrZXIucmVxdWVzdENhbWVyYVJvbGxQZXJtaXNzaW9uc0FzeW5jKCkgaXMgZGVwcmVjYXRlZCBpbiBmYXZvdXIgb2YgSW1hZ2VQaWNrZXIucmVxdWVzdE1lZGlhTGlicmFyeVBlcm1pc3Npb25zQXN5bmMoKSdcbiAgKTtcbiAgcmV0dXJuIHJlcXVlc3RNZWRpYUxpYnJhcnlQZXJtaXNzaW9uc0FzeW5jKCk7XG59XG5cbmV4cG9ydCBhc3luYyBmdW5jdGlvbiByZXF1ZXN0TWVkaWFMaWJyYXJ5UGVybWlzc2lvbnNBc3luYyhcbiAgd3JpdGVPbmx5OiBib29sZWFuID0gZmFsc2Vcbik6IFByb21pc2U8TWVkaWFMaWJyYXJ5UGVybWlzc2lvblJlc3BvbnNlPiB7XG4gIC8vIGR1ZSB0byBhIHR5cG8gaW4gaU9TLCB3ZSBuZWVkIHRvIGNoZWNrIG9uIHRoZSB0eXBvIHRvb1xuICAvLyB0b2RvOiByZW1vdmUgdGhpcyB3b3JrYXJvdW5kIGZvciBTREsgNDFcbiAgY29uc3QgaW1hZ2VQaWNrZXJNZXRob2QgPVxuICAgIHR5cGVvZiBFeHBvbmVudEltYWdlUGlja2VyLnJlcXVlc3RNZWRpYUxpYmFyeVBlcm1pc3Npb25zQXN5bmMgPT09ICdmdW5jdGlvbidcbiAgICAgID8gRXhwb25lbnRJbWFnZVBpY2tlci5yZXF1ZXN0TWVkaWFMaWJhcnlQZXJtaXNzaW9uc0FzeW5jXG4gICAgICA6IEV4cG9uZW50SW1hZ2VQaWNrZXIucmVxdWVzdE1lZGlhTGlicmFyeVBlcm1pc3Npb25zQXN5bmM7XG5cbiAgcmV0dXJuIGltYWdlUGlja2VyTWV0aG9kKHdyaXRlT25seSk7XG59XG5cbmV4cG9ydCBhc3luYyBmdW5jdGlvbiBnZXRQZW5kaW5nUmVzdWx0QXN5bmMoKTogUHJvbWlzZTxcbiAgKEltYWdlUGlja2VyUmVzdWx0IHwgSW1hZ2VQaWNrZXJFcnJvclJlc3VsdClbXVxuPiB7XG4gIGlmIChFeHBvbmVudEltYWdlUGlja2VyLmdldFBlbmRpbmdSZXN1bHRBc3luYykge1xuICAgIHJldHVybiBFeHBvbmVudEltYWdlUGlja2VyLmdldFBlbmRpbmdSZXN1bHRBc3luYygpO1xuICB9XG4gIHJldHVybiBbXTtcbn1cblxuZXhwb3J0IGFzeW5jIGZ1bmN0aW9uIGxhdW5jaENhbWVyYUFzeW5jKFxuICBvcHRpb25zOiBJbWFnZVBpY2tlck9wdGlvbnMgPSB7fVxuKTogUHJvbWlzZTxJbWFnZVBpY2tlclJlc3VsdD4ge1xuICBpZiAoIUV4cG9uZW50SW1hZ2VQaWNrZXIubGF1bmNoQ2FtZXJhQXN5bmMpIHtcbiAgICB0aHJvdyBuZXcgVW5hdmFpbGFiaWxpdHlFcnJvcignSW1hZ2VQaWNrZXInLCAnbGF1bmNoQ2FtZXJhQXN5bmMnKTtcbiAgfVxuICByZXR1cm4gYXdhaXQgRXhwb25lbnRJbWFnZVBpY2tlci5sYXVuY2hDYW1lcmFBc3luYyh2YWxpZGF0ZU9wdGlvbnMob3B0aW9ucykpO1xufVxuXG5leHBvcnQgYXN5bmMgZnVuY3Rpb24gbGF1bmNoSW1hZ2VMaWJyYXJ5QXN5bmM8VCBleHRlbmRzIEltYWdlUGlja2VyT3B0aW9ucz4oXG4gIG9wdGlvbnM/OiBUXG4pOiBQcm9taXNlPEV4cGFuZEltYWdlUGlja2VyUmVzdWx0PFQ+PiB7XG4gIGlmICghRXhwb25lbnRJbWFnZVBpY2tlci5sYXVuY2hJbWFnZUxpYnJhcnlBc3luYykge1xuICAgIHRocm93IG5ldyBVbmF2YWlsYWJpbGl0eUVycm9yKCdJbWFnZVBpY2tlcicsICdsYXVuY2hJbWFnZUxpYnJhcnlBc3luYycpO1xuICB9XG4gIHJldHVybiBhd2FpdCBFeHBvbmVudEltYWdlUGlja2VyLmxhdW5jaEltYWdlTGlicmFyeUFzeW5jKG9wdGlvbnMgPz8ge30pO1xufVxuXG5leHBvcnQge1xuICBNZWRpYVR5cGVPcHRpb25zLFxuICBJbWFnZVBpY2tlck9wdGlvbnMsXG4gIEltYWdlUGlja2VyUmVzdWx0LFxuICBJbWFnZVBpY2tlckVycm9yUmVzdWx0LFxuICBWaWRlb0V4cG9ydFByZXNldCxcbiAgQ2FtZXJhUGVybWlzc2lvblJlc3BvbnNlLFxuICBDYW1lcmFSb2xsUGVybWlzc2lvblJlc3BvbnNlLFxuICBNZWRpYUxpYnJhcnlQZXJtaXNzaW9uUmVzcG9uc2UsXG4gIFBlcm1pc3Npb25TdGF0dXMsXG4gIFBlcm1pc3Npb25FeHBpcmF0aW9uLFxufTtcbiJdLCJzb3VyY2VSb290IjoiIn0=

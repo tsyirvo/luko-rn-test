@@ -1,0 +1,5 @@
+f9ee813ce85b0514b7509ea6534a20e1
+describe('NewItem', function () {
+  it('should add an item to a contract', function () {});
+});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIk5ld0l0ZW0udGVzdC50c3giXSwibmFtZXMiOlsiZGVzY3JpYmUiLCJpdCJdLCJtYXBwaW5ncyI6IkFBQUFBLFFBQVEsQ0FBQyxTQUFELEVBQVksWUFBTTtBQUN4QkMsRUFBQUEsRUFBRSxDQUFDLGtDQUFELEVBQXFDLFlBQU0sQ0FBRSxDQUE3QyxDQUFGO0FBQ0QsQ0FGTyxDQUFSIiwic291cmNlc0NvbnRlbnQiOlsiZGVzY3JpYmUoJ05ld0l0ZW0nLCAoKSA9PiB7XG4gIGl0KCdzaG91bGQgYWRkIGFuIGl0ZW0gdG8gYSBjb250cmFjdCcsICgpID0+IHt9KTtcbn0pO1xuIl19

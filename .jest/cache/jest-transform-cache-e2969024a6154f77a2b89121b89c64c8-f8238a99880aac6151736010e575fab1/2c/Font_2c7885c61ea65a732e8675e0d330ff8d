@@ -1,0 +1,301 @@
+1b2709da0b397e0cfc7b099fd23439dc
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.processFontFamily = processFontFamily;
+exports.isLoaded = isLoaded;
+exports.isLoading = isLoading;
+exports.loadAsync = loadAsync;
+exports.unloadAllAsync = unloadAllAsync;
+exports.unloadAsync = unloadAsync;
+Object.defineProperty(exports, "FontDisplay", {
+  enumerable: true,
+  get: function get() {
+    return _Font.FontDisplay;
+  }
+});
+
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
+var _core = require("@unimodules/core");
+
+var _ExpoFontLoader = _interopRequireDefault(require("./ExpoFontLoader"));
+
+var _Font = require("./Font.types");
+
+var _FontLoader = require("./FontLoader");
+
+var loaded = {};
+var loadPromises = {};
+
+function processFontFamily(fontFamily) {
+  if (!fontFamily || !(0, _FontLoader.fontFamilyNeedsScoping)(fontFamily)) {
+    return fontFamily;
+  }
+
+  if (!isLoaded(fontFamily)) {
+    if (__DEV__) {
+      if (isLoading(fontFamily)) {
+        console.error("You started loading the font \"" + fontFamily + "\", but used it before it finished loading.\n\n- You need to wait for Font.loadAsync to complete before using the font.\n\n- We recommend loading all fonts before rendering the app, and rendering only Expo.AppLoading while waiting for loading to complete.");
+      } else {
+        console.error("fontFamily \"" + fontFamily + "\" is not a system font and has not been loaded through Font.loadAsync.\n\n- If you intended to use a system font, make sure you typed the name correctly and that it is supported by your device operating system.\n\n- If this is a custom font, be sure to load it with Font.loadAsync.");
+      }
+    }
+
+    return 'System';
+  }
+
+  return "ExpoFont-" + (0, _FontLoader.getNativeFontName)(fontFamily);
+}
+
+function isLoaded(fontFamily) {
+  return fontFamily in loaded;
+}
+
+function isLoading(fontFamily) {
+  return fontFamily in loadPromises;
+}
+
+function loadAsync(fontFamilyOrFontMap, source) {
+  var fontMap, names;
+  return _regenerator.default.async(function loadAsync$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          if (!(typeof fontFamilyOrFontMap === 'object')) {
+            _context.next = 8;
+            break;
+          }
+
+          if (!source) {
+            _context.next = 3;
+            break;
+          }
+
+          throw new _core.CodedError("ERR_FONT_API", "No fontFamily can be used for the provided source: " + source + ". The second argument of `loadAsync()` can only be used with a `string` value as the first argument.");
+
+        case 3:
+          fontMap = fontFamilyOrFontMap;
+          names = Object.keys(fontMap);
+          _context.next = 7;
+          return _regenerator.default.awrap(Promise.all(names.map(function (name) {
+            return loadFontInNamespaceAsync(name, fontMap[name]);
+          })));
+
+        case 7:
+          return _context.abrupt("return");
+
+        case 8:
+          _context.next = 10;
+          return _regenerator.default.awrap(loadFontInNamespaceAsync(fontFamilyOrFontMap, source));
+
+        case 10:
+          return _context.abrupt("return", _context.sent);
+
+        case 11:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, null, null, null, Promise);
+}
+
+function loadFontInNamespaceAsync(fontFamily, source) {
+  var asset;
+  return _regenerator.default.async(function loadFontInNamespaceAsync$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          if (source) {
+            _context3.next = 2;
+            break;
+          }
+
+          throw new _core.CodedError("ERR_FONT_SOURCE", "Cannot load null or undefined font source: { \"" + fontFamily + "\": " + source + " }. Expected asset of type `FontSource` for fontFamily of name: \"" + fontFamily + "\"");
+
+        case 2:
+          if (!loaded[fontFamily]) {
+            _context3.next = 4;
+            break;
+          }
+
+          return _context3.abrupt("return");
+
+        case 4:
+          if (!loadPromises[fontFamily]) {
+            _context3.next = 6;
+            break;
+          }
+
+          return _context3.abrupt("return", loadPromises[fontFamily]);
+
+        case 6:
+          asset = (0, _FontLoader.getAssetForSource)(source);
+
+          loadPromises[fontFamily] = function _callee() {
+            return _regenerator.default.async(function _callee$(_context2) {
+              while (1) {
+                switch (_context2.prev = _context2.next) {
+                  case 0:
+                    _context2.prev = 0;
+                    _context2.next = 3;
+                    return _regenerator.default.awrap((0, _FontLoader.loadSingleFontAsync)(fontFamily, asset));
+
+                  case 3:
+                    loaded[fontFamily] = true;
+
+                  case 4:
+                    _context2.prev = 4;
+                    delete loadPromises[fontFamily];
+                    return _context2.finish(4);
+
+                  case 7:
+                  case "end":
+                    return _context2.stop();
+                }
+              }
+            }, null, null, [[0,, 4, 7]], Promise);
+          }();
+
+          _context3.next = 10;
+          return _regenerator.default.awrap(loadPromises[fontFamily]);
+
+        case 10:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  }, null, null, null, Promise);
+}
+
+function unloadAllAsync() {
+  var _i, _Object$keys, fontFamily;
+
+  return _regenerator.default.async(function unloadAllAsync$(_context4) {
+    while (1) {
+      switch (_context4.prev = _context4.next) {
+        case 0:
+          if (_ExpoFontLoader.default.unloadAllAsync) {
+            _context4.next = 2;
+            break;
+          }
+
+          throw new _core.UnavailabilityError('expo-font', 'unloadAllAsync');
+
+        case 2:
+          if (!Object.keys(loadPromises).length) {
+            _context4.next = 4;
+            break;
+          }
+
+          throw new _core.CodedError("ERR_UNLOAD", "Cannot unload fonts while they're still loading: " + Object.keys(loadPromises).join(', '));
+
+        case 4:
+          for (_i = 0, _Object$keys = Object.keys(loaded); _i < _Object$keys.length; _i++) {
+            fontFamily = _Object$keys[_i];
+            delete loaded[fontFamily];
+          }
+
+          _context4.next = 7;
+          return _regenerator.default.awrap(_ExpoFontLoader.default.unloadAllAsync());
+
+        case 7:
+        case "end":
+          return _context4.stop();
+      }
+    }
+  }, null, null, null, Promise);
+}
+
+function unloadAsync(fontFamilyOrFontMap, options) {
+  var fontMap, names;
+  return _regenerator.default.async(function unloadAsync$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
+          if (_ExpoFontLoader.default.unloadAsync) {
+            _context5.next = 2;
+            break;
+          }
+
+          throw new _core.UnavailabilityError('expo-font', 'unloadAsync');
+
+        case 2:
+          if (!(typeof fontFamilyOrFontMap === 'object')) {
+            _context5.next = 10;
+            break;
+          }
+
+          if (!options) {
+            _context5.next = 5;
+            break;
+          }
+
+          throw new _core.CodedError("ERR_FONT_API", "No fontFamily can be used for the provided options: " + options + ". The second argument of `unloadAsync()` can only be used with a `string` value as the first argument.");
+
+        case 5:
+          fontMap = fontFamilyOrFontMap;
+          names = Object.keys(fontMap);
+          _context5.next = 9;
+          return _regenerator.default.awrap(Promise.all(names.map(function (name) {
+            return unloadFontInNamespaceAsync(name, fontMap[name]);
+          })));
+
+        case 9:
+          return _context5.abrupt("return");
+
+        case 10:
+          _context5.next = 12;
+          return _regenerator.default.awrap(unloadFontInNamespaceAsync(fontFamilyOrFontMap, options));
+
+        case 12:
+          return _context5.abrupt("return", _context5.sent);
+
+        case 13:
+        case "end":
+          return _context5.stop();
+      }
+    }
+  }, null, null, null, Promise);
+}
+
+function unloadFontInNamespaceAsync(fontFamily, options) {
+  var nativeFontName;
+  return _regenerator.default.async(function unloadFontInNamespaceAsync$(_context6) {
+    while (1) {
+      switch (_context6.prev = _context6.next) {
+        case 0:
+          if (loaded[fontFamily]) {
+            _context6.next = 4;
+            break;
+          }
+
+          return _context6.abrupt("return");
+
+        case 4:
+          delete loaded[fontFamily];
+
+        case 5:
+          nativeFontName = (0, _FontLoader.getNativeFontName)(fontFamily);
+
+          if (nativeFontName) {
+            _context6.next = 8;
+            break;
+          }
+
+          throw new _core.CodedError("ERR_FONT_FAMILY", "Cannot unload an empty name");
+
+        case 8:
+          _context6.next = 10;
+          return _regenerator.default.awrap(_ExpoFontLoader.default.unloadAsync(nativeFontName, options));
+
+        case 10:
+        case "end":
+          return _context6.stop();
+      }
+    }
+  }, null, null, null, Promise);
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,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LENBQVksT0FBWixDQWZYO0FBQUE7QUFBQSw0Q0FnQkcsT0FBTyxDQUFDLEdBQVIsQ0FBWSxLQUFLLENBQUMsR0FBTixDQUFVLFVBQUEsSUFBSTtBQUFBLG1CQUFJLDBCQUEwQixDQUFDLElBQUQsRUFBTyxPQUFPLENBQUMsSUFBRCxDQUFkLENBQTlCO0FBQUEsV0FBZCxDQUFaLENBaEJIOztBQUFBO0FBQUE7O0FBQUE7QUFBQTtBQUFBLDRDQW9CUSwwQkFBMEIsQ0FBQyxtQkFBRCxFQUFzQixPQUF0QixDQXBCbEM7O0FBQUE7QUFBQTs7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTs7QUF1QlAsU0FBZSwwQkFBZixDQUNFLFVBREYsRUFFRSxPQUZGO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLGNBSU8sTUFBTSxDQUFDLFVBQUQsQ0FKYjtBQUFBO0FBQUE7QUFBQTs7QUFBQTs7QUFBQTtBQU9JLGlCQUFPLE1BQU0sQ0FBQyxVQUFELENBQWI7O0FBUEo7QUFlUSxVQUFBLGNBZlIsR0FleUIsbUNBQWtCLFVBQWxCLENBZnpCOztBQUFBLGNBaUJPLGNBakJQO0FBQUE7QUFBQTtBQUFBOztBQUFBLGdCQWtCVSxJQUFJLGdCQUFKLGtEQWxCVjs7QUFBQTtBQUFBO0FBQUEsNENBcUJRLHdCQUFlLFdBQWYsQ0FBMkIsY0FBM0IsRUFBMkMsT0FBM0MsQ0FyQlI7O0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUEiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDb2RlZEVycm9yLCBVbmF2YWlsYWJpbGl0eUVycm9yIH0gZnJvbSAnQHVuaW1vZHVsZXMvY29yZSc7XG5cbmltcG9ydCBFeHBvRm9udExvYWRlciBmcm9tICcuL0V4cG9Gb250TG9hZGVyJztcbmltcG9ydCB7IEZvbnREaXNwbGF5LCBGb250U291cmNlLCBGb250UmVzb3VyY2UsIFVubG9hZEZvbnRPcHRpb25zIH0gZnJvbSAnLi9Gb250LnR5cGVzJztcbmltcG9ydCB7XG4gIGdldEFzc2V0Rm9yU291cmNlLFxuICBsb2FkU2luZ2xlRm9udEFzeW5jLFxuICBmb250RmFtaWx5TmVlZHNTY29waW5nLFxuICBnZXROYXRpdmVGb250TmFtZSxcbn0gZnJvbSAnLi9Gb250TG9hZGVyJztcblxuY29uc3QgbG9hZGVkOiB7IFtuYW1lOiBzdHJpbmddOiBib29sZWFuIH0gPSB7fTtcbmNvbnN0IGxvYWRQcm9taXNlczogeyBbbmFtZTogc3RyaW5nXTogUHJvbWlzZTx2b2lkPiB9ID0ge307XG5cbi8qKlxuICogVXNlZCB0byB0cmFuc2Zvcm0gZm9udCBmYW1pbHkgbmFtZXMgdG8gdGhlIHNjb3BlZCBuYW1lLiBUaGlzIGRvZXMgbm90IG5lZWQgdG9cbiAqIGJlIGNhbGxlZCBpbiBzdGFuZGFsb25lIG9yIGJhcmUgYXBwcyBidXQgaXQgd2lsbCByZXR1cm4gdW5zY29wZWQgZm9udCBmYW1pbHlcbiAqIG5hbWVzIGlmIGl0IGlzIGNhbGxlZCBpbiB0aG9zZSBjb250ZXh0cy5cbiAqIG5vdGUoYnJlbnR2YXRuZSk6IGF0IHNvbWUgcG9pbnQgd2UgbWF5IHdhbnQgdG8gd2FybiBpZiB0aGlzIGlzIGNhbGxlZFxuICogb3V0c2lkZSBvZiBhIG1hbmFnZWQgYXBwLlxuICpcbiAqIEBwYXJhbSBmb250RmFtaWx5IG5hbWUgdG8gcHJvY2Vzc1xuICogQHJldHVybnMgYSBuYW1lIHByb2Nlc3NlZCBmb3IgdXNlIHdpdGggdGhlIFtjdXJyZW50IHdvcmtmbG93XShodHRwczovL2RvY3MuZXhwby5pby92ZXJzaW9ucy9sYXRlc3QvaW50cm9kdWN0aW9uL21hbmFnZWQtdnMtYmFyZS8pXG4gKi9cbmV4cG9ydCBmdW5jdGlvbiBwcm9jZXNzRm9udEZhbWlseShmb250RmFtaWx5OiBzdHJpbmcgfCBudWxsKTogc3RyaW5nIHwgbnVsbCB7XG4gIGlmICghZm9udEZhbWlseSB8fCAhZm9udEZhbWlseU5lZWRzU2NvcGluZyhmb250RmFtaWx5KSkge1xuICAgIHJldHVybiBmb250RmFtaWx5O1xuICB9XG5cbiAgaWYgKCFpc0xvYWRlZChmb250RmFtaWx5KSkge1xuICAgIGlmIChfX0RFVl9fKSB7XG4gICAgICBpZiAoaXNMb2FkaW5nKGZvbnRGYW1pbHkpKSB7XG4gICAgICAgIGNvbnNvbGUuZXJyb3IoXG4gICAgICAgICAgYFlvdSBzdGFydGVkIGxvYWRpbmcgdGhlIGZvbnQgXCIke2ZvbnRGYW1pbHl9XCIsIGJ1dCB1c2VkIGl0IGJlZm9yZSBpdCBmaW5pc2hlZCBsb2FkaW5nLlxcblxuLSBZb3UgbmVlZCB0byB3YWl0IGZvciBGb250LmxvYWRBc3luYyB0byBjb21wbGV0ZSBiZWZvcmUgdXNpbmcgdGhlIGZvbnQuXFxuXG4tIFdlIHJlY29tbWVuZCBsb2FkaW5nIGFsbCBmb250cyBiZWZvcmUgcmVuZGVyaW5nIHRoZSBhcHAsIGFuZCByZW5kZXJpbmcgb25seSBFeHBvLkFwcExvYWRpbmcgd2hpbGUgd2FpdGluZyBmb3IgbG9hZGluZyB0byBjb21wbGV0ZS5gXG4gICAgICAgICk7XG4gICAgICB9IGVsc2Uge1xuICAgICAgICBjb25zb2xlLmVycm9yKFxuICAgICAgICAgIGBmb250RmFtaWx5IFwiJHtmb250RmFtaWx5fVwiIGlzIG5vdCBhIHN5c3RlbSBmb250IGFuZCBoYXMgbm90IGJlZW4gbG9hZGVkIHRocm91Z2ggRm9udC5sb2FkQXN5bmMuXFxuXG4tIElmIHlvdSBpbnRlbmRlZCB0byB1c2UgYSBzeXN0ZW0gZm9udCwgbWFrZSBzdXJlIHlvdSB0eXBlZCB0aGUgbmFtZSBjb3JyZWN0bHkgYW5kIHRoYXQgaXQgaXMgc3VwcG9ydGVkIGJ5IHlvdXIgZGV2aWNlIG9wZXJhdGluZyBzeXN0ZW0uXFxuXG4tIElmIHRoaXMgaXMgYSBjdXN0b20gZm9udCwgYmUgc3VyZSB0byBsb2FkIGl0IHdpdGggRm9udC5sb2FkQXN5bmMuYFxuICAgICAgICApO1xuICAgICAgfVxuICAgIH1cblxuICAgIHJldHVybiAnU3lzdGVtJztcbiAgfVxuXG4gIHJldHVybiBgRXhwb0ZvbnQtJHtnZXROYXRpdmVGb250TmFtZShmb250RmFtaWx5KX1gO1xufVxuXG4vKipcbiAqIFN5bmNocm9ub3VzbHkgZGV0ZWN0IGlmIHRoZSBmb250IGZvciBgZm9udEZhbWlseWAgaGFzIGZpbmlzaGVkIGxvYWRpbmdcbiAqXG4gKiBAcGFyYW0gZm9udEZhbWlseSB0aGUgbmFtZSB1c2VkIHRvIGxvYWQgdGhlIGBGb250UmVzb3VyY2VgLlxuICogQHJldHVybnMgYHRydWVgIGlmIHRoZSB0aGUgZm9udCBoYXMgZnVsbHkgbG9hZGVkLlxuICovXG5leHBvcnQgZnVuY3Rpb24gaXNMb2FkZWQoZm9udEZhbWlseTogc3RyaW5nKTogYm9vbGVhbiB7XG4gIHJldHVybiBmb250RmFtaWx5IGluIGxvYWRlZDtcbn1cblxuLyoqXG4gKiBTeW5jaHJvbm91c2x5IGRldGVjdCBpZiB0aGUgZm9udCBmb3IgYGZvbnRGYW1pbHlgIGlzIHN0aWxsIGJlaW5nIGxvYWRlZFxuICpcbiAqIEBwYXJhbSBmb250RmFtaWx5IHRoZSBuYW1lIHVzZWQgdG8gbG9hZCB0aGUgYEZvbnRSZXNvdXJjZWAuXG4gKiBAcmV0dXJucyBgdHJ1ZWAgaWYgdGhlIHRoZSBmb250IGlzIHN0aWxsIGxvYWRpbmcuXG4gKi9cbmV4cG9ydCBmdW5jdGlvbiBpc0xvYWRpbmcoZm9udEZhbWlseTogc3RyaW5nKTogYm9vbGVhbiB7XG4gIHJldHVybiBmb250RmFtaWx5IGluIGxvYWRQcm9taXNlcztcbn1cblxuLyoqXG4gKiBOYXRpdmVseSBsb2FkIGEgZm9udCBmb3IgdXNlIHdpdGggVGV4dCBlbGVtZW50cy5cbiAqIEBwYXJhbSBmb250RmFtaWx5T3JGb250TWFwIHN0cmluZyBvciBtYXAgb2YgdmFsdWVzIHRoYXQgY2FuIGJlIHVzZWQgYXMgdGhlIFtgZm9udEZhbWlseWBdKGh0dHBzOi8vcmVhY3RuYXRpdmUuZGV2L2RvY3MvdGV4dCNzdHlsZSkgc3R5bGUgcHJvcCB3aXRoIFJlYWN0IE5hdGl2ZSBUZXh0IGVsZW1lbnRzLlxuICogQHBhcmFtIHNvdXJjZSB0aGUgZm9udCBhc3NldCB0aGF0IHNob3VsZCBiZSBsb2FkZWQgaW50byB0aGUgYGZvbnRGYW1pbHlgIG5hbWVzcGFjZS5cbiAqL1xuZXhwb3J0IGFzeW5jIGZ1bmN0aW9uIGxvYWRBc3luYyhcbiAgZm9udEZhbWlseU9yRm9udE1hcDogc3RyaW5nIHwgeyBbZm9udEZhbWlseTogc3RyaW5nXTogRm9udFNvdXJjZSB9LFxuICBzb3VyY2U/OiBGb250U291cmNlXG4pOiBQcm9taXNlPHZvaWQ+IHtcbiAgaWYgKHR5cGVvZiBmb250RmFtaWx5T3JGb250TWFwID09PSAnb2JqZWN0Jykge1xuICAgIGlmIChzb3VyY2UpIHtcbiAgICAgIHRocm93IG5ldyBDb2RlZEVycm9yKFxuICAgICAgICBgRVJSX0ZPTlRfQVBJYCxcbiAgICAgICAgYE5vIGZvbnRGYW1pbHkgY2FuIGJlIHVzZWQgZm9yIHRoZSBwcm92aWRlZCBzb3VyY2U6ICR7c291cmNlfS4gVGhlIHNlY29uZCBhcmd1bWVudCBvZiBcXGBsb2FkQXN5bmMoKVxcYCBjYW4gb25seSBiZSB1c2VkIHdpdGggYSBcXGBzdHJpbmdcXGAgdmFsdWUgYXMgdGhlIGZpcnN0IGFyZ3VtZW50LmBcbiAgICAgICk7XG4gICAgfVxuICAgIGNvbnN0IGZvbnRNYXAgPSBmb250RmFtaWx5T3JGb250TWFwO1xuICAgIGNvbnN0IG5hbWVzID0gT2JqZWN0LmtleXMoZm9udE1hcCk7XG4gICAgYXdhaXQgUHJvbWlzZS5hbGwobmFtZXMubWFwKG5hbWUgPT4gbG9hZEZvbnRJbk5hbWVzcGFjZUFzeW5jKG5hbWUsIGZvbnRNYXBbbmFtZV0pKSk7XG4gICAgcmV0dXJuO1xuICB9XG5cbiAgcmV0dXJuIGF3YWl0IGxvYWRGb250SW5OYW1lc3BhY2VBc3luYyhmb250RmFtaWx5T3JGb250TWFwLCBzb3VyY2UpO1xufVxuXG5hc3luYyBmdW5jdGlvbiBsb2FkRm9udEluTmFtZXNwYWNlQXN5bmMoXG4gIGZvbnRGYW1pbHk6IHN0cmluZyxcbiAgc291cmNlPzogRm9udFNvdXJjZSB8IG51bGxcbik6IFByb21pc2U8dm9pZD4ge1xuICBpZiAoIXNvdXJjZSkge1xuICAgIHRocm93IG5ldyBDb2RlZEVycm9yKFxuICAgICAgYEVSUl9GT05UX1NPVVJDRWAsXG4gICAgICBgQ2Fubm90IGxvYWQgbnVsbCBvciB1bmRlZmluZWQgZm9udCBzb3VyY2U6IHsgXCIke2ZvbnRGYW1pbHl9XCI6ICR7c291cmNlfSB9LiBFeHBlY3RlZCBhc3NldCBvZiB0eXBlIFxcYEZvbnRTb3VyY2VcXGAgZm9yIGZvbnRGYW1pbHkgb2YgbmFtZTogXCIke2ZvbnRGYW1pbHl9XCJgXG4gICAgKTtcbiAgfVxuXG4gIGlmIChsb2FkZWRbZm9udEZhbWlseV0pIHtcbiAgICByZXR1cm47XG4gIH1cblxuICBpZiAobG9hZFByb21pc2VzW2ZvbnRGYW1pbHldKSB7XG4gICAgcmV0dXJuIGxvYWRQcm9taXNlc1tmb250RmFtaWx5XTtcbiAgfVxuXG4gIC8vIEltcG9ydGFudDogd2Ugd2FudCBhbGwgY2FsbGVycyB0aGF0IGNvbmN1cnJlbnRseSB0cnkgdG8gbG9hZCB0aGUgc2FtZSBmb250IHRvIGF3YWl0IHRoZSBzYW1lXG4gIC8vIHByb21pc2UuIElmIHdlJ3JlIGhlcmUsIHdlIGhhdmVuJ3QgY3JlYXRlZCB0aGUgcHJvbWlzZSB5ZXQuIFRvIGVuc3VyZSB3ZSBjcmVhdGUgb25seSBvbmVcbiAgLy8gcHJvbWlzZSBpbiB0aGUgcHJvZ3JhbSwgd2UgbmVlZCB0byBjcmVhdGUgdGhlIHByb21pc2Ugc3luY2hyb25vdXNseSB3aXRob3V0IHlpZWxkaW5nIHRoZSBldmVudFxuICAvLyBsb29wIGZyb20gdGhpcyBwb2ludC5cblxuICBjb25zdCBhc3NldCA9IGdldEFzc2V0Rm9yU291cmNlKHNvdXJjZSk7XG4gIGxvYWRQcm9taXNlc1tmb250RmFtaWx5XSA9IChhc3luYyAoKSA9PiB7XG4gICAgdHJ5IHtcbiAgICAgIGF3YWl0IGxvYWRTaW5nbGVGb250QXN5bmMoZm9udEZhbWlseSwgYXNzZXQpO1xuICAgICAgbG9hZGVkW2ZvbnRGYW1pbHldID0gdHJ1ZTtcbiAgICB9IGZpbmFsbHkge1xuICAgICAgZGVsZXRlIGxvYWRQcm9taXNlc1tmb250RmFtaWx5XTtcbiAgICB9XG4gIH0pKCk7XG5cbiAgYXdhaXQgbG9hZFByb21pc2VzW2ZvbnRGYW1pbHldO1xufVxuXG4vKipcbiAqIFVubG9hZHMgYWxsIG9mIHRoZSBjdXN0b20gZm9udHMuIFRoaXMgaXMgdXNlZCBmb3IgdGVzdGluZy5cbiAqL1xuZXhwb3J0IGFzeW5jIGZ1bmN0aW9uIHVubG9hZEFsbEFzeW5jKCk6IFByb21pc2U8dm9pZD4ge1xuICBpZiAoIUV4cG9Gb250TG9hZGVyLnVubG9hZEFsbEFzeW5jKSB7XG4gICAgdGhyb3cgbmV3IFVuYXZhaWxhYmlsaXR5RXJyb3IoJ2V4cG8tZm9udCcsICd1bmxvYWRBbGxBc3luYycpO1xuICB9XG5cbiAgaWYgKE9iamVjdC5rZXlzKGxvYWRQcm9taXNlcykubGVuZ3RoKSB7XG4gICAgdGhyb3cgbmV3IENvZGVkRXJyb3IoXG4gICAgICBgRVJSX1VOTE9BRGAsXG4gICAgICBgQ2Fubm90IHVubG9hZCBmb250cyB3aGlsZSB0aGV5J3JlIHN0aWxsIGxvYWRpbmc6ICR7T2JqZWN0LmtleXMobG9hZFByb21pc2VzKS5qb2luKCcsICcpfWBcbiAgICApO1xuICB9XG5cbiAgZm9yIChjb25zdCBmb250RmFtaWx5IG9mIE9iamVjdC5rZXlzKGxvYWRlZCkpIHtcbiAgICBkZWxldGUgbG9hZGVkW2ZvbnRGYW1pbHldO1xuICB9XG5cbiAgYXdhaXQgRXhwb0ZvbnRMb2FkZXIudW5sb2FkQWxsQXN5bmMoKTtcbn1cblxuLyoqXG4gKiBVbmxvYWQgY3VzdG9tIGZvbnRzIG1hdGNoaW5nIHRoZSBgZm9udEZhbWlseWBzIGFuZCBkaXNwbGF5IHZhbHVlcyBwcm92aWRlZC5cbiAqIEJlY2F1c2UgZm9udHMgYXJlIGF1dG9tYXRpY2FsbHkgdW5sb2FkZWQgb24gZXZlcnkgcGxhdGZvcm0gdGhpcyBpcyBtb3N0bHkgdXNlZCBmb3IgdGVzdGluZy5cbiAqXG4gKiBAcGFyYW0gZm9udEZhbWlseU9yRm9udE1hcCB0aGUgbmFtZXMgb2YgdGhlIGN1c3RvbSBmb250cyB0aGF0IHdpbGwgYmUgdW5sb2FkZWQuXG4gKiBAcGFyYW0gc291cmNlIHdoZW4gYGZvbnRGYW1pbHlPckZvbnRNYXBgIGlzIGEgc3RyaW5nLCB0aGlzIHNob3VsZCBiZSB0aGUgZm9udCBzb3VyY2UgdXNlZCB0byBsb2FkIHRoZSBjdXN0b20gZm9udCBvcmlnaW5hbGx5LlxuICovXG5leHBvcnQgYXN5bmMgZnVuY3Rpb24gdW5sb2FkQXN5bmMoXG4gIGZvbnRGYW1pbHlPckZvbnRNYXA6IHN0cmluZyB8IHsgW2ZvbnRGYW1pbHk6IHN0cmluZ106IFVubG9hZEZvbnRPcHRpb25zIH0sXG4gIG9wdGlvbnM/OiBVbmxvYWRGb250T3B0aW9uc1xuKTogUHJvbWlzZTx2b2lkPiB7XG4gIGlmICghRXhwb0ZvbnRMb2FkZXIudW5sb2FkQXN5bmMpIHtcbiAgICB0aHJvdyBuZXcgVW5hdmFpbGFiaWxpdHlFcnJvcignZXhwby1mb250JywgJ3VubG9hZEFzeW5jJyk7XG4gIH1cbiAgaWYgKHR5cGVvZiBmb250RmFtaWx5T3JGb250TWFwID09PSAnb2JqZWN0Jykge1xuICAgIGlmIChvcHRpb25zKSB7XG4gICAgICB0aHJvdyBuZXcgQ29kZWRFcnJvcihcbiAgICAgICAgYEVSUl9GT05UX0FQSWAsXG4gICAgICAgIGBObyBmb250RmFtaWx5IGNhbiBiZSB1c2VkIGZvciB0aGUgcHJvdmlkZWQgb3B0aW9uczogJHtvcHRpb25zfS4gVGhlIHNlY29uZCBhcmd1bWVudCBvZiBcXGB1bmxvYWRBc3luYygpXFxgIGNhbiBvbmx5IGJlIHVzZWQgd2l0aCBhIFxcYHN0cmluZ1xcYCB2YWx1ZSBhcyB0aGUgZmlyc3QgYXJndW1lbnQuYFxuICAgICAgKTtcbiAgICB9XG4gICAgY29uc3QgZm9udE1hcCA9IGZvbnRGYW1pbHlPckZvbnRNYXA7XG4gICAgY29uc3QgbmFtZXMgPSBPYmplY3Qua2V5cyhmb250TWFwKTtcbiAgICBhd2FpdCBQcm9taXNlLmFsbChuYW1lcy5tYXAobmFtZSA9PiB1bmxvYWRGb250SW5OYW1lc3BhY2VBc3luYyhuYW1lLCBmb250TWFwW25hbWVdKSkpO1xuICAgIHJldHVybjtcbiAgfVxuXG4gIHJldHVybiBhd2FpdCB1bmxvYWRGb250SW5OYW1lc3BhY2VBc3luYyhmb250RmFtaWx5T3JGb250TWFwLCBvcHRpb25zKTtcbn1cblxuYXN5bmMgZnVuY3Rpb24gdW5sb2FkRm9udEluTmFtZXNwYWNlQXN5bmMoXG4gIGZvbnRGYW1pbHk6IHN0cmluZyxcbiAgb3B0aW9ucz86IFVubG9hZEZvbnRPcHRpb25zIHwgbnVsbFxuKTogUHJvbWlzZTx2b2lkPiB7XG4gIGlmICghbG9hZGVkW2ZvbnRGYW1pbHldKSB7XG4gICAgcmV0dXJuO1xuICB9IGVsc2Uge1xuICAgIGRlbGV0ZSBsb2FkZWRbZm9udEZhbWlseV07XG4gIH1cblxuICAvLyBJbXBvcnRhbnQ6IHdlIHdhbnQgYWxsIGNhbGxlcnMgdGhhdCBjb25jdXJyZW50bHkgdHJ5IHRvIGxvYWQgdGhlIHNhbWUgZm9udCB0byBhd2FpdCB0aGUgc2FtZVxuICAvLyBwcm9taXNlLiBJZiB3ZSdyZSBoZXJlLCB3ZSBoYXZlbid0IGNyZWF0ZWQgdGhlIHByb21pc2UgeWV0LiBUbyBlbnN1cmUgd2UgY3JlYXRlIG9ubHkgb25lXG4gIC8vIHByb21pc2UgaW4gdGhlIHByb2dyYW0sIHdlIG5lZWQgdG8gY3JlYXRlIHRoZSBwcm9taXNlIHN5bmNocm9ub3VzbHkgd2l0aG91dCB5aWVsZGluZyB0aGUgZXZlbnRcbiAgLy8gbG9vcCBmcm9tIHRoaXMgcG9pbnQuXG5cbiAgY29uc3QgbmF0aXZlRm9udE5hbWUgPSBnZXROYXRpdmVGb250TmFtZShmb250RmFtaWx5KTtcblxuICBpZiAoIW5hdGl2ZUZvbnROYW1lKSB7XG4gICAgdGhyb3cgbmV3IENvZGVkRXJyb3IoYEVSUl9GT05UX0ZBTUlMWWAsIGBDYW5ub3QgdW5sb2FkIGFuIGVtcHR5IG5hbWVgKTtcbiAgfVxuXG4gIGF3YWl0IEV4cG9Gb250TG9hZGVyLnVubG9hZEFzeW5jKG5hdGl2ZUZvbnROYW1lLCBvcHRpb25zKTtcbn1cblxuZXhwb3J0IHsgRm9udERpc3BsYXksIEZvbnRTb3VyY2UsIEZvbnRSZXNvdXJjZSwgVW5sb2FkRm9udE9wdGlvbnMgfTtcbiJdLCJzb3VyY2VSb290IjoiIn0=

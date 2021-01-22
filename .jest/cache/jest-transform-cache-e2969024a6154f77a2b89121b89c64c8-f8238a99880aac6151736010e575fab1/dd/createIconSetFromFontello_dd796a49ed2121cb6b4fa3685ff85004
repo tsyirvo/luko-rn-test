@@ -1,0 +1,14 @@
+3769aacbae9787b45f8165bc7a6e99b5
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+var _createIconSetFromFontello = _interopRequireDefault(require("./vendor/react-native-vector-icons/lib/create-icon-set-from-fontello"));
+
+function _default(config, expoFontName, expoAssetId) {
+  return (0, _createIconSetFromFontello.default)(config, expoFontName, expoAssetId);
+}
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL3NyYy9jcmVhdGVJY29uU2V0RnJvbUZvbnRlbGxvLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFBQTs7QUFFYyxrQkFBVSxNQUFWLEVBQWtCLFlBQWxCLEVBQWdDLFdBQWhDLEVBQTJDO0FBQ3ZELFNBQU8sd0NBQTBCLE1BQTFCLEVBQWtDLFlBQWxDLEVBQWdELFdBQWhELENBQVA7QUFDRCIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBjcmVhdGVJY29uU2V0RnJvbUZvbnRlbGxvIGZyb20gJy4vdmVuZG9yL3JlYWN0LW5hdGl2ZS12ZWN0b3ItaWNvbnMvbGliL2NyZWF0ZS1pY29uLXNldC1mcm9tLWZvbnRlbGxvJztcblxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24oY29uZmlnLCBleHBvRm9udE5hbWUsIGV4cG9Bc3NldElkKSB7XG4gIHJldHVybiBjcmVhdGVJY29uU2V0RnJvbUZvbnRlbGxvKGNvbmZpZywgZXhwb0ZvbnROYW1lLCBleHBvQXNzZXRJZCk7XG59XG4iXSwic291cmNlUm9vdCI6IiJ9
