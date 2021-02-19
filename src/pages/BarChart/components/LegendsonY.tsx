@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-import { supportedSteps } from '../utils/constants';
+import { isAndroid, supportedSteps } from '../utils/constants';
 
 type Props = {
   currentMaxValue: number;
@@ -12,7 +12,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     // backgroundColor: 'yellow',
     minWidth: 45,
-    // width: 50,
+  },
+  textWrapper: {
+    height: 20,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  },
+  text: {
+    color: '#96948A',
+    fontSize: 10,
   },
 });
 
@@ -47,9 +55,11 @@ const LegendsOnY = ({ currentMaxValue }: Props) => {
   return (
     <View style={styles.container}>
       {range.map((value) => (
-        <Text key={value}>{`${value}W`}</Text>
+        <View key={value} style={styles.textWrapper}>
+          <Text style={styles.text}>{`${value}W`}</Text>
+        </View>
       ))}
-      <Text />
+      <Text style={styles.textWrapper} />
     </View>
   );
 };

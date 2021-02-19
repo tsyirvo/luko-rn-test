@@ -23,6 +23,8 @@ const styles = StyleSheet.create({
   },
   text: {
     marginTop: 4,
+    color: '#96948A',
+    fontSize: 10,
   },
 });
 
@@ -35,8 +37,6 @@ const LegendsOnX = ({
 }: Props) => {
   const [hasBeenMeasured, setHasBeenMeasured] = useState(false);
   const legendWidth = useRef(0);
-  console.log('---');
-  console.log('legendWidth.current', legendWidth.current);
 
   // Calculus for the bar sizes and the associated margins
   const totalBarSizes = barCount * barWidth;
@@ -73,11 +73,8 @@ const LegendsOnX = ({
   };
   const getFirstLegendPosition = (index: number) => {
     if (barPerLegend !== 1 && index === 0 && hasBeenMeasured) {
-      console.log('legendWidth.current', legendWidth.current);
-      console.log('barTotalSize', barTotalSize);
       if (legendWidth.current >= barTotalSize) return 0;
 
-      console.log('here', (barTotalSize - legendWidth.current) / 2);
       return (barTotalSize - legendWidth.current) / 2;
     }
 

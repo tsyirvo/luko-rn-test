@@ -4,6 +4,7 @@ import { LayoutChangeEvent, StyleSheet, View } from 'react-native';
 import { isAndroid } from '../utils/constants';
 
 import Bar from './Bar';
+import HorizontalLines from './HorizontalLines';
 
 const styles = StyleSheet.create({
   container: {
@@ -12,7 +13,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'flex-end',
     marginRight: isAndroid ? 10 : 8,
-    // backgroundColor: 'red',
+    // backgroundColor: 'green',
   },
 });
 
@@ -27,6 +28,8 @@ const Graph = ({ barCount, barWidth, getGraphWidth }: Props) => {
 
   return (
     <View style={styles.container} onLayout={getGraphWidth}>
+      <HorizontalLines />
+
       {test.map((i) => (
         <Bar key={i} barWidth={barWidth} />
       ))}

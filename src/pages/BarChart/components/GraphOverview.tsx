@@ -9,19 +9,28 @@ const styles = StyleSheet.create({
     paddingVertical: MARGIN,
   },
   title: {
-    color: 'black',
+    color: '#2C2302',
+    fontSize: 26,
+    lineHeight: 32,
     paddingVertical: 5,
   },
   text: {
-    color: 'grey',
+    color: '#96948A',
+    fontSize: 13,
+    lineHeight: 17,
+  },
+  textBis: {
+    color: '#96948A',
+    fontSize: 15,
+    lineHeight: 20,
   },
 });
 
 const GraphOverview = () => (
   <View style={styles.container}>
-    <Text style={styles.text}>Average</Text>
+    <Text style={styles.text}>AVERAGE</Text>
     <Text style={styles.title}>380 W</Text>
-    <Text style={styles.text}>19 JAV 2020</Text>
+    <Text style={styles.textBis}>19 JAV 2020</Text>
   </View>
 );
 

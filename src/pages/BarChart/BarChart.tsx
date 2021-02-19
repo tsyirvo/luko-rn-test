@@ -26,7 +26,7 @@ type Props = {
   temporality: Temporality;
 };
 
-const BarChart = ({ temporality = 'yearly' }: Props) => {
+const BarChart = ({ temporality = 'weekly' }: Props) => {
   const [graphWidth, setGraphWidth] = useState(0);
   const [currentMaxValue, setCurrentMaxValue] = useState(Math.random() * 10200);
   const barWidth = useRef(0);
