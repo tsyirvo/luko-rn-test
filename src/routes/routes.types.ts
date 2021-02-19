@@ -5,6 +5,9 @@ import { ContractCities } from '../contexts/itemsContext';
 /* ***** *****  Stack router types  ***** ***** */
 
 export type RootStackParamList = {
+  BarChart: undefined;
+  Charts: undefined;
+  ChartsBis: undefined;
   ItemsList: undefined;
   ContractSelection: undefined;
   NewItem: { contract: ContractCities };

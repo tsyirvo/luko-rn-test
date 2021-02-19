@@ -13,13 +13,16 @@ const screenOptions = {
 
 const RootStack = () => (
   <NavigationContainer>
-    <Stack.Navigator initialRouteName="ItemsList" screenOptions={screenOptions}>
-      <Stack.Screen name="ItemsList" component={Pages.ItemsList} />
+    <Stack.Navigator initialRouteName="BarChart" screenOptions={screenOptions}>
+      <Stack.Screen name="BarChart" component={Pages.BarChart} />
+      <Stack.Screen name="Charts" component={Pages.Charts} />
+      <Stack.Screen name="ChartsBis" component={Pages.ChartsBis} />
+      {/* <Stack.Screen name="ItemsList" component={Pages.ItemsList} />
       <Stack.Screen
         name="ContractSelection"
         component={Pages.ContractSelection}
       />
-      <Stack.Screen name="NewItem" component={Pages.NewItem} />
+      <Stack.Screen name="NewItem" component={Pages.NewItem} /> */}
     </Stack.Navigator>
   </NavigationContainer>
 );

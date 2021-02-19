@@ -9,11 +9,11 @@ import SafeView from '../../components/shared/SafeView';
 const contracts = [
   {
     id: 'paris',
-    label: "Paris's apparent",
+    label: "Paris's appartment",
   },
   {
     id: 'london',
-    label: "London's apparent",
+    label: "London's appartment",
   },
 ];
 
